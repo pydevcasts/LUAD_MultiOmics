@@ -1,103 +1,107 @@
-tcga:
-  clinical:
-    path: "datasets/data_clinical_patient.txt"
+files:
+  - key: clinical_patient
     modality: clinical
+    filename: data_clinical_patient.txt
+    description: "Clinical patient data"
+    audit: true
+    use_in_model: true
     expected_format: tabular
-    separator: auto
-    patient_id_column: null
-    sample_id_column: null
-    target_column: null
-    audit_status: pending
 
-  mrna:
-    path: "datasets/data_mrna_seq_v2_rsem.txt"
+  - key: mrna_rsem
     modality: mrna
-    separator: auto
+    filename: data_mrna_seq_v2_rsem.txt
+    description: "mRNA expression RSEM"
+    audit: true
+    use_in_model: true
+    expected_format: matrix
     orientation: unknown
-    feature_id_column: null
-    sample_id_axis: unknown
     already_normalized: unknown
-    audit_status: pending
 
-  mirna:
-    path: "datasets/TCGA-LUAD.mirna.tsv"
+  - key: mirna
     modality: mirna
-    separator: auto
+    filename: TCGA-LUAD.mirna.tsv
+    description: "miRNA expression"
+    audit: true
+    use_in_model: true
+    expected_format: matrix
     orientation: unknown
-    feature_id_column: null
-    sample_id_axis: unknown
     already_normalized: unknown
-    audit_status: pending
 
-  methylation:
-    path: "datasets/data_methylation_hm27_hm450_merged.txt"
+  - key: methylation
     modality: methylation
-    separator: auto
+    filename: data_methylation_hm27_hm450_merged.txt
+    description: "DNA methylation HM27/HM450 merged"
+    audit: true
+    use_in_model: true
+    expected_format: matrix
     orientation: unknown
-    feature_id_column: null
-    sample_id_axis: unknown
     high_dimensional: true
-    audit_status: pending
 
-  cna_raw:
-    path: "datasets/data_cna.txt"
+  - key: cna_raw
     modality: cna
+    filename: data_cna.txt
+    description: "Copy number alteration raw"
+    audit: true
+    use_in_model: false
     representation: raw
-    separator: auto
+    expected_format: matrix
     orientation: unknown
-    feature_id_column: null
-    audit_status: pending
 
-  cna_log2:
-    path: "datasets/data_log2_cna.txt"
+  - key: cna_log2
     modality: cna
+    filename: data_log2_cna.txt
+    description: "Copy number alteration log2"
+    audit: true
+    use_in_model: false
     representation: log2
-    separator: auto
+    expected_format: matrix
     orientation: unknown
-    feature_id_column: null
-    audit_status: pending
 
-  mutation:
-    path: "datasets/data_mutations.txt"
+  - key: mutations
     modality: mutation
-    separator: auto
+    filename: data_mutations.txt
+    description: "Mutation data"
+    audit: true
+    use_in_model: true
     expected_format: maf_like_or_long_table
-    gene_column: null
-    sample_column: null
-    audit_status: pending
 
-  rppa_raw:
-    path: "datasets/data_rppa.txt"
+  - key: rppa_raw
     modality: rppa
+    filename: data_rppa.txt
+    description: "RPPA raw"
+    audit: true
+    use_in_model: false
     representation: raw
-    separator: auto
+    expected_format: matrix
     orientation: unknown
-    feature_id_column: null
-    audit_status: pending
 
-  rppa_zscores:
-    path: "datasets/data_rppa_zscores.txt"
+  - key: rppa_zscores
     modality: rppa
+    filename: data_rppa_zscores.txt
+    description: "RPPA z-scores"
+    audit: true
+    use_in_model: false
     representation: zscore
-    separator: auto
+    expected_format: matrix
     orientation: unknown
-    feature_id_column: null
-    audit_status: pending
 
-  normals_rna:
-    path: "datasets/data_normals_RNA_Seq_v2_mRNA_median.txt"
+  - key: normals_rna
     modality: normals_reference
-    include_in_main_pipeline: false
-    audit_status: pending
-
-external:
-  gse131907:
-    path: "datasets/GSE131907_Lung_Cancer_normalized_log2TPM_matrix.txt"
-    modality: mrna_external
-    separator: auto
+    filename: data_normals_RNA_Seq_v2_mRNA_median.txt
+    description: "Normal RNA reference; not automatically used in main model"
+    audit: true
+    use_in_model: false
+    expected_format: matrix
     orientation: unknown
-    feature_id_column: null
-    label_path: null
-    sample_metadata_path: null
-    usage: external_validation_only
-    audit_status: pending
+
+  - key: gse131907
+    modality: external_mrna
+    # اگر فایل مستقیماً داخل datasets است، این خط را بکن:
+    filename: GSE131907_Lung_Cancer_normalized_log2TPM_matrix.txt
+    description: "External validation mRNA dataset"
+    audit: true
+    use_in_model: false
+    external_validation_only: true
+    large_external: true
+    expected_format: matrix
+    orientation: unknown

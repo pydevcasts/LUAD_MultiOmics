@@ -5,7 +5,11 @@ project:
   log_level: INFO
 
 paths:
+  # اگر داده‌ها داخل پوشه datasets در ریشه پروژه هستند، همین مقدار درست است.
+  # اگر داده‌ها در مسیر اصلی هستند، این خط را عوض کن به:
+  # raw_dir: "D:/خانم محمدی/datasets"
   raw_dir: "datasets"
+
   interim_dir: data/interim
   processed_dir: data/processed
   external_dir: data/external
@@ -17,7 +21,7 @@ audit:
   max_rows_for_schema: 1000
   max_rows_for_missingness: 20000
   max_features_for_profile: 5000
-  count_rows: auto
+  count_rows: false
   large_file_mb: 500
   inspect_external_full: false
   external_header_only: true
@@ -33,15 +37,6 @@ task:
   target: null
   target_type: null
   target_candidates: []
-
-  # اگر target نهایی stage باشد:
-  # target: STAGE
-  # target_type: multiclass
-
-  # اگر survival باشد:
-  # target: OS_STATUS
-  # target_type: binary
-  # survival_time: OS_MONTHS
 
 labels:
   unknown_label_policy: drop_or_exclude
@@ -120,7 +115,6 @@ modalities:
 external_validation:
   enabled: false
   dataset_name: GSE131907
-  path: "GSE131907_Lung_Cancer_normalized_log2TPM_matrix.txt"
   usage: final_external_validation_only
   allow_feature_selection: false
   allow_hyperparameter_tuning: false
@@ -287,25 +281,32 @@ resampling:
 
 fusion:
   strategy: late
+
   late:
     meta_learner: logistic_regression
     probability_inputs: true
     representation_inputs: false
     stack_cv: true
+
   early:
     concat_modalities: true
+
   intermediate:
     concatenate_representations: true
 
 models:
   logistic_regression:
     enabled: true
+
   random_forest:
     enabled: true
+
   svm:
     enabled: true
+
   xgboost:
     enabled: true
+
   gkan:
     enabled: false
     implementation_status: not_implemented
@@ -330,10 +331,12 @@ evaluation:
     - f1_weighted
     - roc_auc
     - mcc
+
   multiclass_average:
     - macro
     - weighted
     - per_class
+
   save_confusion_matrix: true
   save_roc_curve: true
   save_pr_curve: true
@@ -341,10 +344,13 @@ evaluation:
 
 explainability:
   enabled: true
+
   methods:
     - shap
+
   lime:
     enabled: false
+
   max_samples_for_shap: 300
   save_summary_plot: true
   save_dependence_plots: true
@@ -359,6 +365,7 @@ biomarker:
 experiments:
   run_ablation: true
   output_dir: artifacts/reports
+
   ablation_experiments:
     - clinical_only
     - mrna_only
