@@ -1,0 +1,26 @@
+experiment:
+  name: baseline
+  description: "Baseline models on selected modalities without advanced FS."
+
+fusion:
+  strategy: early
+
+feature_selection:
+  method: variance_mi
+  metaheuristic:
+    enabled: false
+
+models:
+  logistic_regression:
+    enabled: true
+  random_forest:
+    enabled: true
+  svm:
+    enabled: true
+  xgboost:
+    enabled: true
+
+optimization:
+  enabled: true
+  method: random
+  n_iter: 30

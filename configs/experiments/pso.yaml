@@ -1,0 +1,30 @@
+experiment:
+  name: pso
+  description: "Multi-omics with PSO-based feature selection."
+
+fusion:
+  strategy: early
+
+feature_selection:
+  method: variance_mi_metaheuristic
+  mutual_information:
+    enabled: true
+    top_k: 3000
+  metaheuristic:
+    enabled: true
+    method: pso
+    top_k: 50
+
+  pso:
+    particles: 30
+    iterations: 50
+    inertia_min: 0.4
+    inertia_max: 0.9
+    cognitive: 1.5
+    social: 1.5
+    cv_folds: 5
+    scoring: balanced_accuracy
+
+models:
+  xgboost:
+    enabled: true

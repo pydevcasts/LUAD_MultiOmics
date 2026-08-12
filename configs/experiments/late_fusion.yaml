@@ -1,0 +1,26 @@
+experiment:
+  name: late_fusion
+  description: "Late fusion modality-specific models with meta learner."
+
+fusion:
+  strategy: late
+  late:
+    meta_learner: logistic_regression
+    probability_inputs: true
+    representation_inputs: false
+    stack_cv: true
+
+models:
+  logistic_regression:
+    enabled: true
+  random_forest:
+    enabled: true
+  svm:
+    enabled: true
+  xgboost:
+    enabled: true
+
+feature_selection:
+  method: variance_mi
+  metaheuristic:
+    enabled: false

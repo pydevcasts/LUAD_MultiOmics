@@ -1,0 +1,103 @@
+tcga:
+  clinical:
+    path: "datasets/data_clinical_patient.txt"
+    modality: clinical
+    expected_format: tabular
+    separator: auto
+    patient_id_column: null
+    sample_id_column: null
+    target_column: null
+    audit_status: pending
+
+  mrna:
+    path: "datasets/data_mrna_seq_v2_rsem.txt"
+    modality: mrna
+    separator: auto
+    orientation: unknown
+    feature_id_column: null
+    sample_id_axis: unknown
+    already_normalized: unknown
+    audit_status: pending
+
+  mirna:
+    path: "datasets/TCGA-LUAD.mirna.tsv"
+    modality: mirna
+    separator: auto
+    orientation: unknown
+    feature_id_column: null
+    sample_id_axis: unknown
+    already_normalized: unknown
+    audit_status: pending
+
+  methylation:
+    path: "datasets/data_methylation_hm27_hm450_merged.txt"
+    modality: methylation
+    separator: auto
+    orientation: unknown
+    feature_id_column: null
+    sample_id_axis: unknown
+    high_dimensional: true
+    audit_status: pending
+
+  cna_raw:
+    path: "datasets/data_cna.txt"
+    modality: cna
+    representation: raw
+    separator: auto
+    orientation: unknown
+    feature_id_column: null
+    audit_status: pending
+
+  cna_log2:
+    path: "datasets/data_log2_cna.txt"
+    modality: cna
+    representation: log2
+    separator: auto
+    orientation: unknown
+    feature_id_column: null
+    audit_status: pending
+
+  mutation:
+    path: "datasets/data_mutations.txt"
+    modality: mutation
+    separator: auto
+    expected_format: maf_like_or_long_table
+    gene_column: null
+    sample_column: null
+    audit_status: pending
+
+  rppa_raw:
+    path: "datasets/data_rppa.txt"
+    modality: rppa
+    representation: raw
+    separator: auto
+    orientation: unknown
+    feature_id_column: null
+    audit_status: pending
+
+  rppa_zscores:
+    path: "datasets/data_rppa_zscores.txt"
+    modality: rppa
+    representation: zscore
+    separator: auto
+    orientation: unknown
+    feature_id_column: null
+    audit_status: pending
+
+  normals_rna:
+    path: "datasets/data_normals_RNA_Seq_v2_mRNA_median.txt"
+    modality: normals_reference
+    include_in_main_pipeline: false
+    audit_status: pending
+
+external:
+  gse131907:
+    path: "datasets/GSE131907_Lung_Cancer_normalized_log2TPM_matrix.txt"
+    modality: mrna_external
+    separator: auto
+    orientation: unknown
+    feature_id_column: null
+    label_path: null
+    sample_metadata_path: null
+    usage: external_validation_only
+    audit_status: pending

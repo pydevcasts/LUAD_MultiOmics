@@ -1,0 +1,27 @@
+experiment:
+  name: advanced
+  description: "Advanced experimental architecture. GKAN/QPSO only if validated implementation exists."
+
+fusion:
+  strategy: late
+
+feature_selection:
+  method: variance_mi_metaheuristic
+  metaheuristic:
+    enabled: true
+    method: pso
+  quantum_pso:
+    enabled: false
+    implementation_status: not_implemented
+
+models:
+  xgboost:
+    enabled: true
+  gkan:
+    enabled: false
+    implementation_status: not_implemented
+
+optimization:
+  enabled: true
+  method: random
+  n_iter: 50

@@ -1,0 +1,379 @@
+RAW FILES
+│
+├── data_clinical_patient.txt
+├── data_mrna_seq_v2_rsem.txt
+├── TCGA-LUAD.mirna.tsv
+├── data_methylation_hm27_hm450_merged.txt
+├── data_cna.txt
+├── data_log2_cna.txt
+├── data_mutations.txt
+├── data_rppa.txt
+├── data_rppa_zscores.txt
+└── GSE131907_external_matrix.txt
+        │
+        ▼
+PHASE 0: DATA AUDIT
+        │
+        ├── file size
+        ├── separator
+        ├── header
+        ├── nrows / ncols
+        ├── sample ID candidates
+        ├── patient ID candidates
+        ├── feature ID candidates
+        ├── orientation
+        ├── missingness
+        ├── duplicates
+        ├── target candidates
+        ├── leakage candidates
+        └── cross-modality overlap
+        │
+        ▼
+GATE 0: TARGET & MODALITY DECISION
+        │
+        ├── target confirmed?
+        ├── sample ID convention confirmed?
+        ├── CNA representation chosen?
+        ├── RPPA representation chosen?
+        ├── minimum common samples accepted?
+        └── external compatibility understood?
+        │
+        ▼
+DATA LOADING
+        │
+        ├── clinical loader
+        ├── mRNA loader
+        ├── miRNA loader
+        ├── methylation loader
+        ├── CNA loader
+        ├── mutation loader
+        └── RPPA loader
+        │
+        ▼
+ID NORMALIZATION & HARMONIZATION
+        │
+        ├── patient-level mapping
+        ├── sample-level mapping
+        ├── barcode transformation log
+        ├── intersection / union rules
+        └── modality overlap report
+        │
+        ▼
+TRAIN / TEST SPLIT
+        │
+        ├── patient-level split
+        ├── stratified by target if possible
+        └── test set locked
+        │
+        ▼
+TRAIN ONLY
+        │
+        ├── inner CV folds
+        │       │
+        │       ├── preprocessing fit
+        │       ├── resampling inside train fold
+        │       ├── variance filter fit
+        │       ├── MI fit
+        │       ├── metaheuristic FS fit
+        │       ├── model fit
+        │       └── validation score
+        │
+        └── final train fit
+                │
+                ├── preprocessing objects
+                ├── feature selector
+                ├── final model
+                └── model freeze
+        │
+        ▼
+LOCKED TEST EVALUATION
+        │
+        ├── apply saved preprocessing
+        ├── apply saved feature selector
+        ├── apply frozen model
+        └── compute metrics
+        │
+        ▼
+EXPLAINABILITY
+        │
+        ├── SHAP global
+        ├── SHAP local
+        ├── feature importance
+        └── biomarker extraction
+        │
+        ▼
+EXTERNAL VALIDATION
+        │
+        ├── check feature compatibility
+        ├── map gene identifiers
+        ├── apply frozen model
+        └── report external metrics
+        │
+        ▼
+REPORTING
+        │
+        ├── model_comparison.csv
+        ├── ablation_results.csv
+        ├── biomarker_report.csv
+        ├── cv_metrics.json
+        ├── test_metrics.json
+        ├── external_metrics.json
+        └── final_report.json
+
+
+
+
+<!-- ============================================ -->
+
+
+
+
+
+
+LUAD_MultiOmics
+│
+├── configs/
+│   ├── config.yaml
+│   ├── datasets.yaml
+│   ├── models.yaml
+│   └── experiments/
+│       ├── baseline.yaml
+│       ├── multiomics.yaml
+│       ├── pso.yaml
+│       ├── late_fusion.yaml
+│       └── advanced.yaml
+│
+├── data/
+│   ├── raw/
+│   ├── interim/
+│   ├── processed/
+│   └── external/
+│
+├── src/
+│   └── luad/
+│       ├── config/
+│       │   ├── loader.py
+│       │   ├── schema.py
+│       │   └── validator.py
+│       │
+│       ├── data/
+│       │   ├── audit.py
+│       │   ├── loaders.py
+│       │   ├── clinical.py
+│       │   ├── mrna.py
+│       │   ├── mirna.py
+│       │   ├── methylation.py
+│       │   ├── cna.py
+│       │   ├── mutation.py
+│       │   ├── rppa.py
+│       │   ├── external.py
+│       │   ├── identifiers.py
+│       │   └── harmonizer.py
+│       │
+│       ├── preprocessing/
+│       │   ├── base.py
+│       │   ├── missing.py
+│       │   ├── normalization.py
+│       │   ├── filtering.py
+│       │   ├── encoding.py
+│       │   ├── resampling.py
+│       │   └── pipeline.py
+│       │
+│       ├── feature_selection/
+│       │   ├── base.py
+│       │   ├── variance.py
+│       │   ├── mutual_information.py
+│       │   ├── wrapper.py
+│       │   ├── pso.py
+│       │   ├── genetic_algorithm.py
+│       │   ├── quantum_pso.py
+│       │   ├── pathway_selection.py
+│       │   └── stability.py
+│       │
+│       ├── models/
+│       │   ├── base.py
+│       │   ├── registry.py
+│       │   ├── logistic_regression.py
+│       │   ├── random_forest.py
+│       │   ├── svm.py
+│       │   ├── xgboost_model.py
+│       │   ├── gkan.py
+│       │   └── ensemble.py
+│       │
+│       ├── fusion/
+│       │   ├── base.py
+│       │   ├── early.py
+│       │   ├── intermediate.py
+│       │   ├── late.py
+│       │   └── stacking.py
+│       │
+│       ├── optimization/
+│       │   ├── base.py
+│       │   ├── grid_search.py
+│       │   ├── random_search.py
+│       │   └── search_space.py
+│       │
+│       ├── evaluation/
+│       │   ├── metrics.py
+│       │   ├── curves.py
+│       │   ├── confusion_matrix.py
+│       │   ├── statistical_summary.py
+│       │   └── external_validation.py
+│       │
+│       ├── explainability/
+│       │   ├── shap_analysis.py
+│       │   ├── lime_analysis.py
+│       │   ├── biomarker.py
+│       │   └── cross_omics.py
+│       │
+│       ├── experiments/
+│       │   ├── runner.py
+│       │   ├── registry.py
+│       │   ├── ablation.py
+│       │   └── metadata.py
+│       │
+│       └── utils/
+│           ├── logger.py
+│           ├── seed.py
+│           ├── io.py
+│           ├── paths.py
+│           └── versions.py
+│
+├── scripts/
+│   ├── audit_data.py
+│   ├── prepare_data.py
+│   ├── train.py
+│   ├── evaluate.py
+│   ├── explain.py
+│   ├── external_validation.py
+│   ├── run_pipeline.py
+│   └── run_ablation.py
+│
+├── notebooks/
+│   ├── 01_data_exploration/
+│   ├── 02_data_preparation/
+│   ├── 03_integration/
+│   ├── 04_baseline_models/
+│   ├── 05_feature_selection/
+│   ├── 06_ensemble/
+│   ├── 07_gkan/
+│   ├── 08_xai/
+│   ├── 09_external_validation/
+│   └── 10_final_analysis/
+│
+├── artifacts/
+│   ├── data_audit/
+│   ├── models/
+│   ├── metrics/
+│   ├── figures/
+│   ├── feature_selection/
+│   ├── reports/
+│   └── logs/
+│
+├── tests/
+│   ├── test_config.py
+│   ├── test_audit.py
+│   ├── test_identifiers.py
+│   ├── test_preprocessing.py
+│   ├── test_feature_selection.py
+│   ├── test_models.py
+│   ├── test_fusion.py
+│   ├── test_metrics.py
+│   └── test_pipeline_smoke.py
+│
+├── requirements.txt
+├── environment.yml
+├── .gitignore
+└── README.md
+
+
+<!-- ==================================== -->
+
+
+
+artifacts/
+│
+├── data_audit/
+│   ├── dataset_summary.csv
+│   ├── schema_report.json
+│   ├── missingness_report.csv
+│   ├── duplicate_report.csv
+│   ├── sample_overlap.csv
+│   ├── identifier_mapping.csv
+│   ├── clinical_target_candidates.csv
+│   ├── leakage_audit.csv
+│   ├── external_compatibility_report.json
+│   └── DATA_AUDIT_REPORT.md
+│
+├── models/
+│   ├── final_model.joblib
+│   ├── best_params.json
+│   └── best_score.json
+│
+├── metrics/
+│   ├── train_metrics.json
+│   ├── cv_metrics.json
+│   ├── test_metrics.json
+│   └── external_metrics.json
+│
+├── feature_selection/
+│   ├── selected_features.csv
+│   ├── feature_scores.csv
+│   ├── pso_history.json
+│   └── stability_report.csv
+│
+├── figures/
+│   ├── confusion_matrix.png
+│   ├── roc_curve.png
+│   ├── pr_curve.png
+│   ├── shap_summary.png
+│   └── feature_importance.png
+│
+├── reports/
+│   ├── model_comparison.csv
+│   ├── ablation_results.csv
+│   ├── biomarker_report.csv
+│   ├── cross_omics_biomarker_report.csv
+│   └── final_report.json
+│
+└── logs/
+    └── experiment.log
+
+
+
+<!-- =========================================== -->
+
+
+
+
+
+
+# Data audit
+python scripts/audit_data.py --config configs/config.yaml
+
+# Prepare data
+python scripts/prepare_data.py --config configs/config.yaml
+
+# Train
+python scripts/train.py --config configs/config.yaml
+
+# Evaluate
+python scripts/evaluate.py --config configs/config.yaml
+
+# Explainability
+python scripts/explain.py --config configs/config.yaml
+
+# External validation
+python scripts/external_validation.py --config configs/config.yaml
+
+# Full pipeline
+python scripts/run_pipeline.py --config configs/config.yaml
+
+# Experiment-specific pipeline
+python scripts/run_pipeline.py --config configs/experiments/baseline.yaml
+python scripts/run_pipeline.py --config configs/experiments/pso.yaml
+python scripts/run_pipeline.py --config configs/experiments/late_fusion.yaml
+python scripts/run_pipeline.py --config configs/experiments/advanced.yaml
+
+# Ablation
+python scripts/run_ablation.py --config configs/config.yaml

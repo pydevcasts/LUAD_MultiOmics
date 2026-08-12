@@ -1,0 +1,29 @@
+name: luad_multiomics
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.13
+  - pip
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - pyyaml
+  - joblib
+  - tqdm
+  - rich
+  - psutil
+  - matplotlib
+  - seaborn
+  - xgboost
+  - imbalanced-learn
+  - shap
+  - lime
+  - pyarrow
+  - pytest
+  - pytest-cov
+  - ruff
+  - mypy
+  - pip:
+      - -r requirements.txt

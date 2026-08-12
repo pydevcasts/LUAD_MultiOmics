@@ -1,0 +1,384 @@
+project:
+  name: LUAD_MultiOmics
+  random_state: 42
+  output_dir: artifacts
+  log_level: INFO
+
+paths:
+  raw_dir: "datasets"
+  interim_dir: data/interim
+  processed_dir: data/processed
+  external_dir: data/external
+  artifact_dir: artifacts
+
+audit:
+  enabled: true
+  output_dir: artifacts/data_audit
+  max_rows_for_schema: 1000
+  max_rows_for_missingness: 20000
+  max_features_for_profile: 5000
+  count_rows: auto
+  large_file_mb: 500
+  inspect_external_full: false
+  external_header_only: true
+
+task:
+  # تا قبل از Data Audit نباید target قطعی تعیین شود.
+  # گزینه‌های ممکن:
+  # - binary_diagnosis
+  # - multiclass_staging
+  # - survival_os
+  # - survival_dfs
+  name: pending_target_confirmation
+  target: null
+  target_type: null
+  target_candidates: []
+
+  # اگر target نهایی stage باشد:
+  # target: STAGE
+  # target_type: multiclass
+
+  # اگر survival باشد:
+  # target: OS_STATUS
+  # target_type: binary
+  # survival_time: OS_MONTHS
+
+labels:
+  unknown_label_policy: drop_or_exclude
+  minimum_class_count: 10
+  combine_minor_classes: false
+
+data_audit:
+  fail_on_no_common_samples: true
+  minimum_common_samples: 50
+  save_intermediate_audit: true
+
+identifiers:
+  patient_id_column: null
+  sample_id_column: null
+  tcga_barcode_pattern: "TCGA-[A-Z0-9]{2}-[A-Z0-9]{4}"
+  normalize_patient_id: true
+  log_transformations: true
+
+modalities:
+  clinical:
+    enabled: true
+    file: data_clinical_patient.txt
+    role: clinical
+    treat_as_modality: true
+
+  mrna:
+    enabled: true
+    file: data_mrna_seq_v2_rsem.txt
+    role: expression
+    orientation: unknown
+    already_normalized: unknown
+
+  mirna:
+    enabled: true
+    file: TCGA-LUAD.mirna.tsv
+    role: expression
+    orientation: unknown
+    already_normalized: unknown
+
+  methylation:
+    enabled: true
+    file: data_methylation_hm27_hm450_merged.txt
+    role: epigenomics
+    orientation: unknown
+    high_dimensional: true
+
+  cna:
+    enabled: true
+    representation: raw
+    raw_file: data_cna.txt
+    log2_file: data_log2_cna.txt
+    role: copy_number
+    choose_one_representation: true
+
+  mutation:
+    enabled: true
+    file: data_mutations.txt
+    role: mutation
+    representation: binary_gene_sample
+    aggregate_by_gene: true
+
+  rppa:
+    enabled: true
+    representation: raw
+    raw_file: data_rppa.txt
+    zscore_file: data_rppa_zscores.txt
+    role: proteomics
+    choose_one_representation: true
+
+  normals_rna:
+    enabled: false
+    file: data_normals_RNA_Seq_v2_mRNA_median.txt
+    role: reference_or_qc_only
+    include_in_main_pipeline: false
+
+external_validation:
+  enabled: false
+  dataset_name: GSE131907
+  path: "GSE131907_Lung_Cancer_normalized_log2TPM_matrix.txt"
+  usage: final_external_validation_only
+  allow_feature_selection: false
+  allow_hyperparameter_tuning: false
+  allow_threshold_tuning: false
+  allow_model_retraining: false
+  feature_compatibility_min_rate: 0.80
+  label_column: null
+  sample_metadata_path: null
+
+split:
+  test_size: 0.20
+  stratify: true
+  random_state: 42
+  lock_test_set: true
+  split_level: patient
+
+preprocessing:
+  fit_only_on_train: true
+
+  clinical:
+    missing_numeric_threshold: 0.30
+    missing_categorical_threshold: 0.30
+    encode_categorical: true
+    unknown_category_policy: "missing"
+
+  mrna:
+    remove_duplicate_genes: true
+    gene_symbol_column: null
+    sample_id_axis: unknown
+    normalize_if_needed: false
+    log_transform_if_needed: false
+    variance_filter:
+      enabled: true
+      threshold: 0.01
+    missing:
+      strategy: median
+      max_missing_feature_ratio: 0.20
+
+  mirna:
+    remove_duplicate_mirna: true
+    mirna_id_column: null
+    sample_id_axis: unknown
+    normalize_if_needed: false
+    log_transform_if_needed: false
+    variance_filter:
+      enabled: true
+      threshold: 0.01
+    missing:
+      strategy: median
+      max_missing_feature_ratio: 0.20
+
+  methylation:
+    probe_id_column: null
+    sample_id_axis: unknown
+    missingness_filter:
+      enabled: true
+      max_missing_feature_ratio: 0.20
+      max_missing_sample_ratio: 0.20
+    variance_filter:
+      enabled: true
+      threshold: 0.01
+    preselect_top_k:
+      enabled: true
+      k: 20000
+    missing:
+      strategy: median
+
+  cna:
+    representation: raw
+    remove_duplicate_genes: true
+    gene_symbol_column: null
+    sample_id_axis: unknown
+    missing:
+      strategy: zero_or_median_based_on_audit
+    variance_filter:
+      enabled: true
+      threshold: 0.001
+
+  mutation:
+    gene_column: null
+    sample_column: null
+    build_binary_matrix: true
+    min_gene_frequency: 0.02
+    missing_samples_fill_zero: true
+
+  rppa:
+    representation: raw
+    protein_id_column: null
+    sample_id_axis: unknown
+    missing:
+      strategy: median
+      max_missing_feature_ratio: 0.30
+    variance_filter:
+      enabled: true
+      threshold: 0.01
+
+feature_selection:
+  method: variance_mi
+  fit_only_on_train: true
+
+  missingness_filter:
+    enabled: true
+    max_missing_ratio: 0.20
+
+  variance:
+    enabled: true
+    threshold: 0.01
+
+  mutual_information:
+    enabled: true
+    top_k: 3000
+    random_state: 42
+
+  metaheuristic:
+    enabled: false
+    method: pso
+    top_k: 50
+    objective:
+      metric: balanced_accuracy
+      sparsity_penalty: 0.01
+      stability_weight: 0.10
+      multi_objective: true
+
+  pso:
+    particles: 30
+    iterations: 50
+    inertia_min: 0.4
+    inertia_max: 0.9
+    cognitive: 1.5
+    social: 1.5
+    random_state: 42
+    cv_folds: 5
+    scoring: balanced_accuracy
+
+  genetic_algorithm:
+    enabled: false
+    population_size: 50
+    generations: 50
+    crossover_prob: 0.8
+    mutation_prob: 0.1
+    random_state: 42
+
+  quantum_pso:
+    enabled: false
+    implementation_status: not_implemented
+    note: "Interface only until validated implementation is available."
+
+  pathway_selection:
+    enabled: false
+    pathways:
+      - mitophagy
+      - cuproptosis
+      - ferroptosis
+      - p53_signaling
+      - cell_cycle
+    source: msigdb_or_kegg_or_reactome
+
+resampling:
+  enabled: true
+  method: smote
+  where: inner_training_fold_only
+  random_state: 42
+  sampling_strategy: auto
+
+fusion:
+  strategy: late
+  late:
+    meta_learner: logistic_regression
+    probability_inputs: true
+    representation_inputs: false
+    stack_cv: true
+  early:
+    concat_modalities: true
+  intermediate:
+    concatenate_representations: true
+
+models:
+  logistic_regression:
+    enabled: true
+  random_forest:
+    enabled: true
+  svm:
+    enabled: true
+  xgboost:
+    enabled: true
+  gkan:
+    enabled: false
+    implementation_status: not_implemented
+
+optimization:
+  enabled: true
+  method: random
+  cv: 5
+  scoring: balanced_accuracy
+  n_iter: 50
+  n_jobs: -1
+  refit_on_full_train: true
+  save_cv_results: true
+
+evaluation:
+  metrics:
+    - accuracy
+    - balanced_accuracy
+    - precision_macro
+    - recall_macro
+    - f1_macro
+    - f1_weighted
+    - roc_auc
+    - mcc
+  multiclass_average:
+    - macro
+    - weighted
+    - per_class
+  save_confusion_matrix: true
+  save_roc_curve: true
+  save_pr_curve: true
+  save_fold_scores: true
+
+explainability:
+  enabled: true
+  methods:
+    - shap
+  lime:
+    enabled: false
+  max_samples_for_shap: 300
+  save_summary_plot: true
+  save_dependence_plots: true
+  save_local_explanations: true
+
+biomarker:
+  enabled: true
+  top_k: 50
+  cross_omics_overlap: true
+  save_biomarker_report: true
+
+experiments:
+  run_ablation: true
+  output_dir: artifacts/reports
+  ablation_experiments:
+    - clinical_only
+    - mrna_only
+    - clinical_mrna
+    - mrna_mirna
+    - mrna_mirna_methylation
+    - all_omics
+    - all_omics_fs
+    - all_omics_pso
+    - late_fusion
+    - late_fusion_pso
+    - late_fusion_advanced
+
+logging:
+  file: artifacts/logs/experiment.log
+  console: true
+  level: INFO
+
+reproducibility:
+  save_experiment_metadata: true
+  save_package_versions: true
+  save_config_snapshot: true
+  save_random_seed: true

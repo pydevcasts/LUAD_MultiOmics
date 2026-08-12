@@ -1,0 +1,300 @@
+# ============================================================
+# LUAD Multi-Omics Project
+# Git Ignore Configuration
+# ============================================================
+
+
+# ------------------------------------------------------------
+# 1. Python
+# ------------------------------------------------------------
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Python build / distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Packaging
+pip-wheel-metadata/
+share/python-wheels/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Poetry
+poetry.lock
+
+# Conda
+.conda/
+
+# ------------------------------------------------------------
+# 2. Jupyter Notebook
+# ------------------------------------------------------------
+
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Jupyter temporary files
+.jupyter/
+
+# ------------------------------------------------------------
+# 3. Data
+# ------------------------------------------------------------
+
+# IMPORTANT:
+# Raw biomedical datasets should NOT be committed to Git.
+
+data/raw/
+data/interim/
+data/processed/
+data/external/
+
+# Any large dataset files
+*.csv
+*.tsv
+*.txt
+*.h5
+*.hdf5
+*.h5ad
+*.parquet
+*.feather
+*.pkl
+*.pickle
+
+# ------------------------------------------------------------
+# 4. Large TCGA / GEO datasets
+# ------------------------------------------------------------
+
+# TCGA
+data_mrna_seq_v2_rsem.txt
+data_clinical_patient.txt
+data_cna.txt
+data_log2_cna.txt
+data_methylation_hm27_hm450_merged.txt
+data_mutations.txt
+data_normals_RNA_Seq_v2_mRNA_median.txt
+data_rppa.txt
+data_rppa_zscores.txt
+TCGA-LUAD.mirna.tsv
+
+# GEO / External Validation
+GSE131907_Lung_Cancer_normalized_log2TPM_matrix.txt
+
+# ------------------------------------------------------------
+# 5. Dataset directories
+# ------------------------------------------------------------
+
+datasets/
+dataset/
+raw_data/
+raw/
+external_data/
+
+# ------------------------------------------------------------
+# 6. Machine Learning Artifacts
+# ------------------------------------------------------------
+
+artifacts/models/
+artifacts/metrics/
+artifacts/figures/
+artifacts/feature_selection/
+artifacts/reports/
+artifacts/logs/
+
+# Trained models
+*.joblib
+*.model
+*.onnx
+*.pt
+*.pth
+*.h5
+
+# ------------------------------------------------------------
+# 7. Experiment outputs
+# ------------------------------------------------------------
+
+experiments/results/
+experiments/runs/
+runs/
+outputs/
+results/
+
+# ML experiment trackers
+mlruns/
+wandb/
+.wandb/
+
+# TensorBoard
+runs/
+tensorboard/
+
+# ------------------------------------------------------------
+# 8. Logs
+# ------------------------------------------------------------
+
+*.log
+logs/
+artifacts/logs/
+
+# ------------------------------------------------------------
+# 9. Cache
+# ------------------------------------------------------------
+
+.cache/
+.cache/**
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Joblib cache
+joblib_cache/
+
+# ------------------------------------------------------------
+# 10. Temporary files
+# ------------------------------------------------------------
+
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ------------------------------------------------------------
+# 11. IDE
+# ------------------------------------------------------------
+
+.vscode/
+.idea/
+*.iml
+
+# VS Code settings that may contain local paths
+.vscode/settings.json
+
+# ------------------------------------------------------------
+# 12. OS
+# ------------------------------------------------------------
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# ------------------------------------------------------------
+# 13. Environment / Secrets
+# ------------------------------------------------------------
+
+.env
+.env.*
+!.env.example
+
+*.secret
+*.key
+*.pem
+
+# ------------------------------------------------------------
+# 14. Local configuration
+# ------------------------------------------------------------
+
+# Ignore local machine-specific configs
+configs/local.yaml
+configs/local.yml
+
+# ------------------------------------------------------------
+# 15. Temporary audit files
+# ------------------------------------------------------------
+
+data_audit/
+audit_output/
+tmp/
+temp/
+
+# ------------------------------------------------------------
+# 16. Generated reports
+# ------------------------------------------------------------
+
+*.html
+*.xlsx
+
+# ------------------------------------------------------------
+# 17. Profiling
+# ------------------------------------------------------------
+
+*.prof
+*.lprof
+.prof
+
+# ------------------------------------------------------------
+# 18. Coverage / Testing
+# ------------------------------------------------------------
+
+.pytest_cache/
+.tox/
+.nox/
+
+# ------------------------------------------------------------
+# 19. Documentation build
+# ------------------------------------------------------------
+
+docs/_build/
+site/
+
+# ------------------------------------------------------------
+# 20. Keep important project files
+# ------------------------------------------------------------
+
+# Make sure these can remain tracked even if broad
+# patterns above match them.
+
+!requirements.txt
+!environment.yml
+!README.md
+
+# Example configuration files should be tracked
+!configs/
+!configs/*.yaml
+!configs/*.yml
+!configs/experiments/
+!configs/experiments/*.yaml
+!configs/experiments/*.yml
+
+# Keep source code
+!src/
+!src/**/*.py
+
+# Keep scripts
+!scripts/
+!scripts/**/*.py
+
+# Keep tests
+!tests/
+!tests/**/*.py
+
+# Keep notebook structure/code
+!notebooks/
+!notebooks/**/*.ipynb
+
+# Keep documentation
+!docs/
+!docs/**/*.md
