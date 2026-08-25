@@ -1,0 +1,69 @@
+task:
+  name: multiclass_staging
+  target: AJCC_PATHOLOGIC_TUMOR_STAGE
+  target_type: multiclass
+
+  target_preprocessing:
+    strip: true
+    uppercase: true
+    grouped_target_column: STAGE_GROUP
+
+    mapping:
+      "STAGE IA": "STAGE I"
+      "STAGE IB": "STAGE I"
+      "STAGE I": "STAGE I"
+
+      "STAGE IIA": "STAGE II"
+      "STAGE IIB": "STAGE II"
+      "STAGE II": "STAGE II"
+
+      "STAGE IIIA": "STAGE III"
+      "STAGE IIIB": "STAGE III"
+      "STAGE IIIC": "STAGE III"
+      "STAGE III": "STAGE III"
+
+      "STAGE IV": "STAGE IV"
+      "STAGE IVA": "STAGE IV"
+      "STAGE IVB": "STAGE IV"
+
+  allowed_classes:
+    - "STAGE I"
+    - "STAGE II"
+    - "STAGE III"
+    - "STAGE IV"
+
+  drop_missing_target: true
+
+clinical_data:
+  patient_id_column: null
+
+  patient_id_candidates:
+    - PATIENT_ID
+    - OTHER_PATIENT_ID
+    - SAMPLE_ID
+    - TUMOR_SAMPLE_BARCODE
+
+  leakage_drop_columns:
+    - PATH_T_STAGE
+    - PATH_N_STAGE
+    - PATH_M_STAGE
+    - AJCC_STAGING_EDITION
+    - OS_STATUS
+    - OS_MONTHS
+    - DFS_STATUS
+    - DFS_MONTHS
+    - DAYS_LAST_FOLLOWUP
+    - NEW_TUMOR_EVENT_AFTER_INITIAL_TREATMENT
+    - RADIATION_THERAPY
+    - CHEMOTHERAPY
+    - TARGETED_MOLECULAR_THERAPY
+    - SYSTEMIC_THERAPY
+    - TREATMENT_OUTCOME
+    - TREATMENT_TYPE
+    - TREATMENT_RESPONSE
+    - SUBTYPE
+    - DAYS_TO_INITIAL_PATHOLOGIC_DIAGNOSIS
+
+  constant_or_low_value_drop_columns:
+    - SUBTYPE
+    - DAYS_TO_INITIAL_PATHOLOGIC_DIAGNOSIS

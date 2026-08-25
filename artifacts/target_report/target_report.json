@@ -1,0 +1,112 @@
+{
+  "clinical_file": "D:\\LUAD_MultiOmics\\LUAD_MultiOmics\\datasets\\data_clinical_patient.txt",
+  "clinical_rows": 566,
+  "clinical_columns": 38,
+  "target_column": "AJCC_PATHOLOGIC_TUMOR_STAGE",
+  "target_found": true,
+  "raw_target_summary": {
+    "missing_count": 54,
+    "missing_ratio": 0.09540636042402827,
+    "unique_count": 9,
+    "counts": {
+      "STAGE IB": 139,
+      "STAGE IA": 134,
+      "STAGE IIIA": 72,
+      "STAGE IIB": 71,
+      "STAGE IIA": 52,
+      "STAGE IV": 27,
+      "STAGE IIIB": 11,
+      "STAGE I": 5,
+      "STAGE II": 1
+    }
+  },
+  "mapped_target_summary": {
+    "missing_count": 54,
+    "missing_ratio": 0.09540636042402827,
+    "unique_count": 4,
+    "counts": {
+      "STAGE I": 278,
+      "STAGE II": 124,
+      "STAGE III": 83,
+      "STAGE IV": 27
+    }
+  },
+  "minimum_class_count": 10,
+  "low_count_classes": {},
+  "allowed_classes": [
+    "STAGE I",
+    "STAGE II",
+    "STAGE III",
+    "STAGE IV"
+  ],
+  "outside_allowed_classes": {},
+  "patient_id_candidates": [],
+  "leakage_columns_present": [
+    "PATH_T_STAGE",
+    "PATH_N_STAGE",
+    "PATH_M_STAGE",
+    "AJCC_STAGING_EDITION",
+    "OS_STATUS",
+    "OS_MONTHS",
+    "DFS_STATUS",
+    "DFS_MONTHS",
+    "DAYS_LAST_FOLLOWUP",
+    "NEW_TUMOR_EVENT_AFTER_INITIAL_TREATMENT",
+    "RADIATION_THERAPY",
+    "SUBTYPE",
+    "DAYS_TO_INITIAL_PATHOLOGIC_DIAGNOSIS"
+  ],
+  "leakage_columns_missing": [
+    "CHEMOTHERAPY",
+    "TARGETED_MOLECULAR_THERAPY",
+    "SYSTEMIC_THERAPY",
+    "TREATMENT_OUTCOME",
+    "TREATMENT_TYPE",
+    "TREATMENT_RESPONSE"
+  ],
+  "constant_columns": [
+    {
+      "column": "SUBTYPE",
+      "dtype": "str",
+      "missing_ratio": 0.113074,
+      "unique_count": 1,
+      "top_values": "LUAD: 502"
+    },
+    {
+      "column": "CANCER_TYPE_ACRONYM",
+      "dtype": "str",
+      "missing_ratio": 0.0,
+      "unique_count": 1,
+      "top_values": "LUAD: 566"
+    },
+    {
+      "column": "DAYS_TO_INITIAL_PATHOLOGIC_DIAGNOSIS",
+      "dtype": "float64",
+      "missing_ratio": 0.125442,
+      "unique_count": 1,
+      "top_values": "0.0: 495"
+    },
+    {
+      "column": "INFORMED_CONSENT_VERIFIED",
+      "dtype": "str",
+      "missing_ratio": 0.091873,
+      "unique_count": 1,
+      "top_values": "Yes: 514"
+    },
+    {
+      "column": "PRIMARY_LYMPH_NODE_PRESENTATION_ASSESSMENT",
+      "dtype": "float64",
+      "missing_ratio": 1.0,
+      "unique_count": 0,
+      "top_values": ""
+    },
+    {
+      "column": "WEIGHT",
+      "dtype": "float64",
+      "missing_ratio": 1.0,
+      "unique_count": 0,
+      "top_values": ""
+    }
+  ],
+  "recommendation": "The recommended primary target is AJCC_PATHOLOGIC_TUMOR_STAGE grouped into STAGE I/II/III/IV. Class counts are acceptable for multiclass staging with balanced metrics. For stage prediction, PATH_T_STAGE, PATH_N_STAGE, PATH_M_STAGE, OS/DFS fields, treatment/follow-up fields, and staging edition should be excluded to avoid leakage."
+}
