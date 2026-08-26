@@ -35,7 +35,7 @@ task:
   drop_missing_target: true
 
 clinical_data:
-  patient_id_column: null
+  patient_id_column: PATIENT_ID
 
   patient_id_candidates:
     - PATIENT_ID
@@ -50,20 +50,41 @@ clinical_data:
     - AJCC_STAGING_EDITION
     - OS_STATUS
     - OS_MONTHS
+    - DSS_STATUS
+    - DSS_MONTHS
     - DFS_STATUS
     - DFS_MONTHS
+    - PFS_STATUS
+    - PFS_MONTHS
     - DAYS_LAST_FOLLOWUP
-    - NEW_TUMOR_EVENT_AFTER_INITIAL_TREATMENT
-    - RADIATION_THERAPY
-    - CHEMOTHERAPY
-    - TARGETED_MOLECULAR_THERAPY
-    - SYSTEMIC_THERAPY
-    - TREATMENT_OUTCOME
-    - TREATMENT_TYPE
-    - TREATMENT_RESPONSE
-    - SUBTYPE
+    - DAYS_TO_BIRTH
     - DAYS_TO_INITIAL_PATHOLOGIC_DIAGNOSIS
+    - NEW_TUMOR_EVENT_AFTER_INITIAL_TREATMENT
+    - PERSON_NEOPLASM_CANCER_STATUS
+    - RADIATION_THERAPY
+    - FORM_COMPLETION_DATE
+    - IN_PANCANPATHWAYS_FREEZE
+    - INFORMED_CONSENT_VERIFIED
+    - SUBTYPE
+    - CANCER_TYPE_ACRONYM
+    - PRIMARY_LYMPH_NODE_PRESENTATION_ASSESSMENT
+    - WEIGHT
 
   constant_or_low_value_drop_columns:
     - SUBTYPE
+    - CANCER_TYPE_ACRONYM
     - DAYS_TO_INITIAL_PATHOLOGIC_DIAGNOSIS
+    - INFORMED_CONSENT_VERIFIED
+    - PRIMARY_LYMPH_NODE_PRESENTATION_ASSESSMENT
+    - WEIGHT
+
+harmonization:
+  include_tumor_only: true
+  scan_mutation_full: true
+  mutation_preview_rows: 2000
+  mutation_chunksize: 100000
+
+mutation_data:
+  sample_column: Tumor_Sample_Barcode
+  gene_column: Hugo_Symbol
+  include_matched_normal: false

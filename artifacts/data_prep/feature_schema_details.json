@@ -1,0 +1,133 @@
+{
+  "mrna_rsem": [
+    {
+      "dataset_key": "mrna_rsem",
+      "modality": "mrna",
+      "column": "Hugo_Symbol",
+      "dtype": "str",
+      "missing_in_preview": 3,
+      "unique_in_preview": 2,
+      "example_values": "nan; nan; UBE2Q2P2"
+    },
+    {
+      "dataset_key": "mrna_rsem",
+      "modality": "mrna",
+      "column": "Entrez_Gene_Id",
+      "dtype": "int64",
+      "missing_in_preview": 0,
+      "unique_in_preview": 5,
+      "example_values": "100130426; 100133144; 100134869"
+    }
+  ],
+  "mirna": [
+    {
+      "dataset_key": "mirna",
+      "modality": "mirna",
+      "column": "miRNA_ID",
+      "dtype": "str",
+      "missing_in_preview": 0,
+      "unique_in_preview": 5,
+      "example_values": "hsa-let-7a-1; hsa-let-7a-2; hsa-let-7a-3"
+    }
+  ],
+  "methylation": [
+    {
+      "dataset_key": "methylation",
+      "modality": "methylation",
+      "column": "ENTITY_STABLE_ID",
+      "dtype": "str",
+      "missing_in_preview": 0,
+      "unique_in_preview": 5,
+      "example_values": "cg00000292; cg00003994; cg00005847"
+    },
+    {
+      "dataset_key": "methylation",
+      "modality": "methylation",
+      "column": "NAME",
+      "dtype": "str",
+      "missing_in_preview": 0,
+      "unique_in_preview": 5,
+      "example_values": "ATP2A1; MEOX2; HOXD3"
+    },
+    {
+      "dataset_key": "methylation",
+      "modality": "methylation",
+      "column": "DESCRIPTION",
+      "dtype": "str",
+      "missing_in_preview": 0,
+      "unique_in_preview": 3,
+      "example_values": "1stExon; 1stExon; 5'UTR"
+    },
+    {
+      "dataset_key": "methylation",
+      "modality": "methylation",
+      "column": "TRANSCRIPT_ID",
+      "dtype": "str",
+      "missing_in_preview": 0,
+      "unique_in_preview": 5,
+      "example_values": "NM_173201;NM_004320; NM_005924; NM_006898"
+    }
+  ],
+  "cna_raw": [
+    {
+      "dataset_key": "cna_raw",
+      "modality": "cna",
+      "column": "Hugo_Symbol",
+      "dtype": "str",
+      "missing_in_preview": 0,
+      "unique_in_preview": 5,
+      "example_values": "ACAP3; ACTRT2; AGRN"
+    },
+    {
+      "dataset_key": "cna_raw",
+      "modality": "cna",
+      "column": "Entrez_Gene_Id",
+      "dtype": "int64",
+      "missing_in_preview": 0,
+      "unique_in_preview": 5,
+      "example_values": "116983; 140625; 375790"
+    }
+  ],
+  "cna_log2": [
+    {
+      "dataset_key": "cna_log2",
+      "modality": "cna",
+      "column": "Hugo_Symbol",
+      "dtype": "str",
+      "missing_in_preview": 0,
+      "unique_in_preview": 5,
+      "example_values": "ACAP3; ACTRT2; AGRN"
+    },
+    {
+      "dataset_key": "cna_log2",
+      "modality": "cna",
+      "column": "Entrez_Gene_Id",
+      "dtype": "int64",
+      "missing_in_preview": 0,
+      "unique_in_preview": 5,
+      "example_values": "116983; 140625; 375790"
+    }
+  ],
+  "rppa_raw": [
+    {
+      "dataset_key": "rppa_raw",
+      "modality": "rppa",
+      "column": "Composite.Element.REF",
+      "dtype": "str",
+      "missing_in_preview": 0,
+      "unique_in_preview": 5,
+      "example_values": "YWHAE|14-3-3_epsilon; EIF4EBP1|4E-BP1; EIF4EBP1|4E-BP1_pS65"
+    }
+  ],
+  "rppa_zscores": [
+    {
+      "dataset_key": "rppa_zscores",
+      "modality": "rppa",
+      "column": "Composite.Element.REF",
+      "dtype": "str",
+      "missing_in_preview": 0,
+      "unique_in_preview": 5,
+      "example_values": "YWHAE|14-3-3_epsilon; EIF4EBP1|4E-BP1; EIF4EBP1|4E-BP1_pS65"
+    }
+  ]
+}

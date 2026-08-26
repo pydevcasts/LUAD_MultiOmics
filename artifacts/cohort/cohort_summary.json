@@ -1,0 +1,49 @@
+{
+  "clinical_rows_with_stage": 512,
+  "target_distribution": {
+    "STAGE I": 278,
+    "STAGE II": 124,
+    "STAGE III": 83,
+    "STAGE IV": 27
+  },
+  "modality_patient_counts": {
+    "mrna_rsem": 510,
+    "mirna": 513,
+    "methylation": 562,
+    "cna_raw": 511,
+    "cna_log2": 511,
+    "rppa_raw": 360,
+    "rppa_zscores": 360
+  },
+  "modality_status": {
+    "mrna_rsem": "ok",
+    "mirna": "ok",
+    "methylation": "ok",
+    "cna_raw": "ok",
+    "cna_log2": "ok",
+    "rppa_raw": "ok",
+    "rppa_zscores": "ok"
+  },
+  "multi_sample_modality_counts": {
+    "mrna_rsem": 0,
+    "mirna": 5,
+    "methylation": 0,
+    "cna_raw": 0,
+    "cna_log2": 0,
+    "rppa_raw": 0,
+    "rppa_zscores": 0
+  },
+  "mutation_schema_status": "ok",
+  "mutation_sample_column": "Tumor_Sample_Barcode",
+  "mutation_gene_column": "Hugo_Symbol",
+  "mutation_patient_count": 562,
+  "intersection_counts": {
+    "stage_only": 512,
+    "mrna": 508,
+    "mrna_mirna": 503,
+    "mrna_mirna_methylation": 501,
+    "mrna_mirna_methylation_cna_raw": 498,
+    "mrna_mirna_methylation_cna_raw_rppa_zscores": 354,
+    "mrna_mirna_methylation_cna_raw_mutations": 494
+  }
+}
