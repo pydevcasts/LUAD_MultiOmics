@@ -1,0 +1,286 @@
+{
+  "fusion": "late",
+  "base_model": "random_forest",
+  "meta_learner": "logistic_regression",
+  "modalities": [
+    "mrna_rsem",
+    "mirna",
+    "cna_raw",
+    "mutations"
+  ],
+  "meta_cv_metrics": {
+    "accuracy": {
+      "mean": 0.32658227848101273,
+      "std": 0.05025172972475749
+    },
+    "balanced_accuracy": {
+      "mean": 0.25966169693219876,
+      "std": 0.07767036269363925
+    },
+    "precision_macro": {
+      "mean": 0.28431401292654485,
+      "std": 0.04015440424269387
+    },
+    "recall_macro": {
+      "mean": 0.25966169693219876,
+      "std": 0.07767036269363925
+    },
+    "f1_macro": {
+      "mean": 0.24684810463124246,
+      "std": 0.05336260310414345
+    },
+    "precision_weighted": {
+      "mean": 0.44447791139655557,
+      "std": 0.05192037343504975
+    },
+    "recall_weighted": {
+      "mean": 0.3265822784810126,
+      "std": 0.05025172972475749
+    },
+    "f1_weighted": {
+      "mean": 0.35604254756647796,
+      "std": 0.05715054831221884
+    },
+    "mcc": {
+      "mean": 0.058835128270380996,
+      "std": 0.06967478756141969
+    },
+    "roc_auc": {
+      "mean": 0.5704952096036431,
+      "std": 0.059183975820740725
+    }
+  },
+  "test_metrics": {
+    "accuracy": 0.26262626262626265,
+    "balanced_accuracy": 0.2886574074074074,
+    "precision_macro": 0.23078802917512595,
+    "recall_macro": 0.2886574074074074,
+    "f1_macro": 0.21984787428661234,
+    "precision_weighted": 0.3376307628507042,
+    "recall_weighted": 0.26262626262626265,
+    "f1_weighted": 0.27558091599829593,
+    "mcc": -0.01926264521689363,
+    "roc_auc": 0.5350229167260057,
+    "per_class": {
+      "STAGE I": {
+        "precision": 0.48484848484848486,
+        "recall": 0.2962962962962963,
+        "f1": 0.367816091954023
+      },
+      "STAGE II": {
+        "precision": 0.15384615384615385,
+        "recall": 0.08333333333333333,
+        "f1": 0.10810810810810811
+      },
+      "STAGE III": {
+        "precision": 0.1935483870967742,
+        "recall": 0.375,
+        "f1": 0.2553191489361702
+      },
+      "STAGE IV": {
+        "precision": 0.09090909090909091,
+        "recall": 0.4,
+        "f1": 0.14814814814814814
+      }
+    }
+  },
+  "base_summaries": [
+    {
+      "modality": "mrna_rsem",
+      "base_model": "random_forest",
+      "log1p": true,
+      "cv_metrics_encoded_labels": {
+        "accuracy": {
+          "mean": 0.4759493670886076,
+          "std": 0.042814011456424717
+        },
+        "balanced_accuracy": {
+          "mean": 0.3090280809222058,
+          "std": 0.04060205010840066
+        },
+        "precision_macro": {
+          "mean": 0.29525607682869887,
+          "std": 0.032296622777912086
+        },
+        "recall_macro": {
+          "mean": 0.3090280809222058,
+          "std": 0.04060205010840066
+        },
+        "f1_macro": {
+          "mean": 0.29800926908238135,
+          "std": 0.03857208846560672
+        },
+        "precision_weighted": {
+          "mean": 0.45123942924427396,
+          "std": 0.03505519574426509
+        },
+        "recall_weighted": {
+          "mean": 0.4759493670886076,
+          "std": 0.042814011456424717
+        },
+        "f1_weighted": {
+          "mean": 0.45869812735311255,
+          "std": 0.03889266626564146
+        },
+        "mcc": {
+          "mean": 0.11698057645212474,
+          "std": 0.07398403579073516
+        },
+        "roc_auc": {
+          "mean": 0.6058025050536989,
+          "std": 0.04106816877913207
+        }
+      }
+    },
+    {
+      "modality": "mirna",
+      "base_model": "random_forest",
+      "log1p": true,
+      "cv_metrics_encoded_labels": {
+        "accuracy": {
+          "mean": 0.4835443037974684,
+          "std": 0.05212977286575697
+        },
+        "balanced_accuracy": {
+          "mean": 0.26965228264187874,
+          "std": 0.043269610263876414
+        },
+        "precision_macro": {
+          "mean": 0.2544085619944087,
+          "std": 0.05622340482305901
+        },
+        "recall_macro": {
+          "mean": 0.26965228264187874,
+          "std": 0.043269610263876414
+        },
+        "f1_macro": {
+          "mean": 0.2531518999424394,
+          "std": 0.046850274887315795
+        },
+        "precision_weighted": {
+          "mean": 0.40095317176226253,
+          "std": 0.049839851663381264
+        },
+        "recall_weighted": {
+          "mean": 0.4835443037974684,
+          "std": 0.05212977286575697
+        },
+        "f1_weighted": {
+          "mean": 0.4297869333437606,
+          "std": 0.0484475171703094
+        },
+        "mcc": {
+          "mean": 0.04657077001305592,
+          "std": 0.09103884497601294
+        },
+        "roc_auc": {
+          "mean": 0.5743619680199632,
+          "std": 0.04827714998934056
+        }
+      }
+    },
+    {
+      "modality": "cna_raw",
+      "base_model": "random_forest",
+      "log1p": false,
+      "cv_metrics_encoded_labels": {
+        "accuracy": {
+          "mean": 0.37215189873417714,
+          "std": 0.04571005084877921
+        },
+        "balanced_accuracy": {
+          "mean": 0.29635638908894724,
+          "std": 0.04946103367684183
+        },
+        "precision_macro": {
+          "mean": 0.283472256750071,
+          "std": 0.03381899879869772
+        },
+        "recall_macro": {
+          "mean": 0.29635638908894724,
+          "std": 0.04946103367684183
+        },
+        "f1_macro": {
+          "mean": 0.2749987172017564,
+          "std": 0.03293735618287827
+        },
+        "precision_weighted": {
+          "mean": 0.435432670737874,
+          "std": 0.04191798563626594
+        },
+        "recall_weighted": {
+          "mean": 0.37215189873417714,
+          "std": 0.04571005084877921
+        },
+        "f1_weighted": {
+          "mean": 0.3837584420623622,
+          "std": 0.04385580605345006
+        },
+        "mcc": {
+          "mean": 0.07390940591577155,
+          "std": 0.06392007751072062
+        },
+        "roc_auc": {
+          "mean": 0.5486013918605869,
+          "std": 0.037183008699699725
+        }
+      }
+    },
+    {
+      "modality": "mutations",
+      "base_model": "random_forest",
+      "log1p": false,
+      "cv_metrics_encoded_labels": {
+        "accuracy": {
+          "mean": 0.46835443037974683,
+          "std": 0.03755037208656033
+        },
+        "balanced_accuracy": {
+          "mean": 0.29401977901059906,
+          "std": 0.027532757738650243
+        },
+        "precision_macro": {
+          "mean": 0.3002249641115188,
+          "std": 0.0316102871248247
+        },
+        "recall_macro": {
+          "mean": 0.29401977901059906,
+          "std": 0.027532757738650243
+        },
+        "f1_macro": {
+          "mean": 0.2919547536892052,
+          "std": 0.027804160550441288
+        },
+        "precision_weighted": {
+          "mean": 0.4339354284689888,
+          "std": 0.031204490122605788
+        },
+        "recall_weighted": {
+          "mean": 0.46835443037974683,
+          "std": 0.03755037208656033
+        },
+        "f1_weighted": {
+          "mean": 0.4457779658709967,
+          "std": 0.03160675657797123
+        },
+        "mcc": {
+          "mean": 0.06859668686675728,
+          "std": 0.06362801555987084
+        },
+        "roc_auc": {
+          "mean": 0.5642773852761112,
+          "std": 0.0681272936355554
+        }
+      }
+    }
+  ],
+  "meta_train_shape": [
+    395,
+    16
+  ],
+  "meta_test_shape": [
+    99,
+    16
+  ],
+  "model_artifact": "D:\\LUAD_MultiOmics\\LUAD_MultiOmics\\artifacts\\experiments\\late_fusion_multi_no_meth_rf\\models\\late_fusion_model.joblib"
+}

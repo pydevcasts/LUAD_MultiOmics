@@ -1,0 +1,36 @@
+{
+  "cohort_name": "core_mutation",
+  "target_column": "stage_group",
+  "cohort_size": 494,
+  "train_size": 395,
+  "test_size": 99,
+  "test_fraction": 0.200405,
+  "random_state": 42,
+  "split_level": "patient",
+  "stratified": true,
+  "lock_test_set": true,
+  "required_columns": [
+    "has_mrna_rsem",
+    "has_mirna",
+    "has_methylation",
+    "has_cna_raw",
+    "has_mutations"
+  ],
+  "train_target_distribution": {
+    "STAGE I": 217,
+    "STAGE II": 93,
+    "STAGE III": 66,
+    "STAGE IV": 19
+  },
+  "test_target_distribution": {
+    "STAGE I": 54,
+    "STAGE II": 24,
+    "STAGE III": 16,
+    "STAGE IV": 5
+  },
+  "outputs": {
+    "train_patient_ids": "D:\\LUAD_MultiOmics\\LUAD_MultiOmics\\artifacts\\splits\\core_mutation\\train_patient_ids.csv",
+    "test_patient_ids": "D:\\LUAD_MultiOmics\\LUAD_MultiOmics\\artifacts\\splits\\core_mutation\\test_patient_ids.csv",
+    "split_manifest": "D:\\LUAD_MultiOmics\\LUAD_MultiOmics\\artifacts\\splits\\core_mutation\\split_manifest.csv"
+  }
+}

@@ -1,0 +1,1058 @@
+[
+  {
+    "model": "logistic_regression",
+    "cv_metrics": {
+      "accuracy": {
+        "mean": 0.4379746835443038,
+        "std": 0.05694795888203541
+      },
+      "balanced_accuracy": {
+        "mean": 0.2572033569585589,
+        "std": 0.04514739524191576
+      },
+      "precision_macro": {
+        "mean": 0.24372014477499296,
+        "std": 0.05217946338063014
+      },
+      "recall_macro": {
+        "mean": 0.2572033569585589,
+        "std": 0.04514739524191576
+      },
+      "f1_macro": {
+        "mean": 0.24867272088843578,
+        "std": 0.04747795493343293
+      },
+      "precision_weighted": {
+        "mean": 0.40507876061501136,
+        "std": 0.05860563790237102
+      },
+      "recall_weighted": {
+        "mean": 0.4379746835443038,
+        "std": 0.05694795888203541
+      },
+      "f1_weighted": {
+        "mean": 0.4188895703107532,
+        "std": 0.05467203553015588
+      },
+      "mcc": {
+        "mean": 0.04345209711742459,
+        "std": 0.09066800206394908
+      },
+      "roc_auc": {
+        "mean": 0.566037378526212,
+        "std": 0.0435453719342983
+      },
+      "fold": {
+        "mean": 3.0,
+        "std": 1.4142135623730951
+      }
+    },
+    "fold_metrics": [
+      {
+        "accuracy": 0.5189873417721519,
+        "balanced_accuracy": 0.3092948717948718,
+        "precision_macro": 0.3049659329140461,
+        "recall_macro": 0.3092948717948718,
+        "f1_macro": 0.3037929323556977,
+        "precision_weighted": 0.46879892789852184,
+        "recall_weighted": 0.5189873417721519,
+        "f1_weighted": 0.48930027683549193,
+        "mcc": 0.14531354113781422,
+        "roc_auc": 0.620431581169286,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.6226415094339622,
+            "recall": 0.75,
+            "f1": 0.6804123711340206
+          },
+          "STAGE II": {
+            "precision": 0.375,
+            "recall": 0.3333333333333333,
+            "f1": 0.35294117647058826
+          },
+          "STAGE III": {
+            "precision": 0.2222222222222222,
+            "recall": 0.15384615384615385,
+            "f1": 0.18181818181818182
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 1
+      },
+      {
+        "accuracy": 0.43037974683544306,
+        "balanced_accuracy": 0.2862218530823182,
+        "precision_macro": 0.2790570175438597,
+        "recall_macro": 0.2862218530823182,
+        "f1_macro": 0.28051146384479714,
+        "precision_weighted": 0.4498667554963358,
+        "recall_weighted": 0.43037974683544306,
+        "f1_weighted": 0.43749693032393455,
+        "mcc": 0.100265317063843,
+        "roc_auc": 0.5182345348767384,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.6578947368421053,
+            "recall": 0.5813953488372093,
+            "f1": 0.6172839506172839
+          },
+          "STAGE II": {
+            "precision": 0.20833333333333334,
+            "recall": 0.2777777777777778,
+            "f1": 0.23809523809523808
+          },
+          "STAGE III": {
+            "precision": 0.25,
+            "recall": 0.2857142857142857,
+            "f1": 0.26666666666666666
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 2
+      },
+      {
+        "accuracy": 0.34177215189873417,
+        "balanced_accuracy": 0.17773750117691367,
+        "precision_macro": 0.16332799145299148,
+        "recall_macro": 0.17773750117691367,
+        "f1_macro": 0.17010692010692013,
+        "precision_weighted": 0.30951125175808725,
+        "recall_weighted": 0.34177215189873417,
+        "f1_weighted": 0.3247265905493754,
+        "mcc": -0.12144679494806593,
+        "roc_auc": 0.5145164905813621,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.5208333333333334,
+            "recall": 0.5813953488372093,
+            "f1": 0.5494505494505495
+          },
+          "STAGE II": {
+            "precision": 0.05555555555555555,
+            "recall": 0.05263157894736842,
+            "f1": 0.05405405405405406
+          },
+          "STAGE III": {
+            "precision": 0.07692307692307693,
+            "recall": 0.07692307692307693,
+            "f1": 0.07692307692307693
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 3
+      },
+      {
+        "accuracy": 0.4430379746835443,
+        "balanced_accuracy": 0.24373881932021468,
+        "precision_macro": 0.20384615384615384,
+        "recall_macro": 0.24373881932021468,
+        "f1_macro": 0.22199248120300752,
+        "precision_weighted": 0.3678675754625122,
+        "recall_weighted": 0.4430379746835443,
+        "f1_weighted": 0.4019510802322261,
+        "mcc": 0.03454501525764249,
+        "roc_auc": 0.5715695891216087,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.6153846153846154,
+            "recall": 0.7441860465116279,
+            "f1": 0.6736842105263158
+          },
+          "STAGE II": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "STAGE III": {
+            "precision": 0.2,
+            "recall": 0.23076923076923078,
+            "f1": 0.21428571428571427
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 4
+      },
+      {
+        "accuracy": 0.45569620253164556,
+        "balanced_accuracy": 0.26902373941847624,
+        "precision_macro": 0.26740362811791385,
+        "recall_macro": 0.26902373941847624,
+        "f1_macro": 0.26695980693175647,
+        "precision_weighted": 0.42934929245959985,
+        "recall_weighted": 0.45569620253164556,
+        "f1_weighted": 0.4409729736127378,
+        "mcc": 0.05858340707588916,
+        "roc_auc": 0.6054346968820653,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.5918367346938775,
+            "recall": 0.6590909090909091,
+            "f1": 0.6236559139784946
+          },
+          "STAGE II": {
+            "precision": 0.2777777777777778,
+            "recall": 0.2631578947368421,
+            "f1": 0.2702702702702703
+          },
+          "STAGE III": {
+            "precision": 0.2,
+            "recall": 0.15384615384615385,
+            "f1": 0.17391304347826086
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 5
+      }
+    ],
+    "test_metrics": {
+      "accuracy": 0.46464646464646464,
+      "balanced_accuracy": 0.28009259259259256,
+      "precision_macro": 0.26746031746031745,
+      "recall_macro": 0.28009259259259256,
+      "f1_macro": 0.2723638368799659,
+      "precision_weighted": 0.4205868205868205,
+      "recall_weighted": 0.46464646464646464,
+      "f1_weighted": 0.44009688584468637,
+      "mcc": 0.07622354996168226,
+      "roc_auc": 0.5766493007754685,
+      "per_class": {
+        "STAGE I": {
+          "precision": 0.6031746031746031,
+          "recall": 0.7037037037037037,
+          "f1": 0.6495726495726496
+        },
+        "STAGE II": {
+          "precision": 0.2,
+          "recall": 0.16666666666666666,
+          "f1": 0.18181818181818182
+        },
+        "STAGE III": {
+          "precision": 0.26666666666666666,
+          "recall": 0.25,
+          "f1": 0.25806451612903225
+        },
+        "STAGE IV": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      }
+    },
+    "selected_feature_count": 1000,
+    "feature_selection_method": "anova",
+    "log1p": true,
+    "model_artifact": "D:\\LUAD_MultiOmics\\LUAD_MultiOmics\\artifacts\\experiments\\baseline_mrna_anova_log1p\\models\\logistic_regression.joblib"
+  },
+  {
+    "model": "random_forest",
+    "cv_metrics": {
+      "accuracy": {
+        "mean": 0.47341772151898737,
+        "std": 0.038058978173095975
+      },
+      "balanced_accuracy": {
+        "mean": 0.28776730715225207,
+        "std": 0.04774759041943384
+      },
+      "precision_macro": {
+        "mean": 0.26961473798737945,
+        "std": 0.0519197553122879
+      },
+      "recall_macro": {
+        "mean": 0.28776730715225207,
+        "std": 0.04774759041943384
+      },
+      "f1_macro": {
+        "mean": 0.27509747784523436,
+        "std": 0.05291413555010667
+      },
+      "precision_weighted": {
+        "mean": 0.42933258684631986,
+        "std": 0.05809608681172309
+      },
+      "recall_weighted": {
+        "mean": 0.47341772151898737,
+        "std": 0.038058978173095975
+      },
+      "f1_weighted": {
+        "mean": 0.44622369497959796,
+        "std": 0.050363563494148576
+      },
+      "mcc": {
+        "mean": 0.08828713265998446,
+        "std": 0.09752821653621087
+      },
+      "roc_auc": {
+        "mean": 0.6083252160145081,
+        "std": 0.04932550378191691
+      },
+      "fold": {
+        "mean": 3.0,
+        "std": 1.4142135623730951
+      }
+    },
+    "fold_metrics": [
+      {
+        "accuracy": 0.5189873417721519,
+        "balanced_accuracy": 0.3171134421134421,
+        "precision_macro": 0.2951176182308258,
+        "recall_macro": 0.3171134421134421,
+        "f1_macro": 0.3023330831720451,
+        "precision_weighted": 0.4574936646825828,
+        "recall_weighted": 0.5189873417721519,
+        "f1_weighted": 0.48282195266135114,
+        "mcc": 0.15211753627304067,
+        "roc_auc": 0.6380937436880061,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.6415094339622641,
+            "recall": 0.7727272727272727,
+            "f1": 0.7010309278350515
+          },
+          "STAGE II": {
+            "precision": 0.18181818181818182,
+            "recall": 0.1111111111111111,
+            "f1": 0.13793103448275862
+          },
+          "STAGE III": {
+            "precision": 0.35714285714285715,
+            "recall": 0.38461538461538464,
+            "f1": 0.37037037037037035
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 1
+      },
+      {
+        "accuracy": 0.4810126582278481,
+        "balanced_accuracy": 0.3254891103728313,
+        "precision_macro": 0.3159722222222222,
+        "recall_macro": 0.3254891103728313,
+        "f1_macro": 0.3202614379084967,
+        "precision_weighted": 0.47995780590717296,
+        "recall_weighted": 0.4810126582278481,
+        "f1_weighted": 0.4801191362620998,
+        "mcc": 0.16425760072998705,
+        "roc_auc": 0.5821492053716606,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.6666666666666666,
+            "recall": 0.6511627906976745,
+            "f1": 0.6588235294117647
+          },
+          "STAGE II": {
+            "precision": 0.2222222222222222,
+            "recall": 0.2222222222222222,
+            "f1": 0.2222222222222222
+          },
+          "STAGE III": {
+            "precision": 0.375,
+            "recall": 0.42857142857142855,
+            "f1": 0.4
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 2
+      },
+      {
+        "accuracy": 0.4430379746835443,
+        "balanced_accuracy": 0.2242491290838904,
+        "precision_macro": 0.19839743589743591,
+        "recall_macro": 0.2242491290838904,
+        "f1_macro": 0.19942494398805077,
+        "precision_weighted": 0.3521097046413503,
+        "recall_weighted": 0.4430379746835443,
+        "f1_weighted": 0.38067592478800544,
+        "mcc": -0.03201715907452402,
+        "roc_auc": 0.575166127901746,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.55,
+            "recall": 0.7674418604651163,
+            "f1": 0.6407766990291263
+          },
+          "STAGE II": {
+            "precision": 0.16666666666666666,
+            "recall": 0.05263157894736842,
+            "f1": 0.08
+          },
+          "STAGE III": {
+            "precision": 0.07692307692307693,
+            "recall": 0.07692307692307693,
+            "f1": 0.07692307692307693
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 3
+      },
+      {
+        "accuracy": 0.5063291139240507,
+        "balanced_accuracy": 0.3363619244892195,
+        "precision_macro": 0.3222402597402597,
+        "recall_macro": 0.3363619244892195,
+        "f1_macro": 0.32910894979860494,
+        "precision_weighted": 0.49001315140555646,
+        "recall_weighted": 0.5063291139240507,
+        "f1_weighted": 0.4979972417772506,
+        "mcc": 0.18589281730915394,
+        "roc_auc": 0.6904028611127754,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.6818181818181818,
+            "recall": 0.6976744186046512,
+            "f1": 0.6896551724137931
+          },
+          "STAGE II": {
+            "precision": 0.25,
+            "recall": 0.2631578947368421,
+            "f1": 0.2564102564102564
+          },
+          "STAGE III": {
+            "precision": 0.35714285714285715,
+            "recall": 0.38461538461538464,
+            "f1": 0.37037037037037035
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 4
+      },
+      {
+        "accuracy": 0.4177215189873418,
+        "balanced_accuracy": 0.2356229297018771,
+        "precision_macro": 0.21634615384615385,
+        "recall_macro": 0.2356229297018771,
+        "f1_macro": 0.22435897435897434,
+        "precision_weighted": 0.3670886075949367,
+        "recall_weighted": 0.4177215189873418,
+        "f1_weighted": 0.3895042194092827,
+        "mcc": -0.02881513193773538,
+        "roc_auc": 0.5558141419983524,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.5576923076923077,
+            "recall": 0.6590909090909091,
+            "f1": 0.6041666666666666
+          },
+          "STAGE II": {
+            "precision": 0.07692307692307693,
+            "recall": 0.05263157894736842,
+            "f1": 0.0625
+          },
+          "STAGE III": {
+            "precision": 0.23076923076923078,
+            "recall": 0.23076923076923078,
+            "f1": 0.23076923076923078
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 5
+      }
+    ],
+    "test_metrics": {
+      "accuracy": 0.494949494949495,
+      "balanced_accuracy": 0.2997685185185185,
+      "precision_macro": 0.28699813258636786,
+      "recall_macro": 0.2997685185185185,
+      "f1_macro": 0.2910700410700411,
+      "precision_weighted": 0.45168774580539284,
+      "recall_weighted": 0.494949494949495,
+      "f1_weighted": 0.4698601062237426,
+      "mcc": 0.13194503738910085,
+      "roc_auc": 0.48765320673289425,
+      "per_class": {
+        "STAGE I": {
+          "precision": 0.6349206349206349,
+          "recall": 0.7407407407407407,
+          "f1": 0.6837606837606838
+        },
+        "STAGE II": {
+          "precision": 0.2777777777777778,
+          "recall": 0.20833333333333334,
+          "f1": 0.23809523809523808
+        },
+        "STAGE III": {
+          "precision": 0.23529411764705882,
+          "recall": 0.25,
+          "f1": 0.24242424242424243
+        },
+        "STAGE IV": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      }
+    },
+    "selected_feature_count": 1000,
+    "feature_selection_method": "anova",
+    "log1p": true,
+    "model_artifact": "D:\\LUAD_MultiOmics\\LUAD_MultiOmics\\artifacts\\experiments\\baseline_mrna_anova_log1p\\models\\random_forest.joblib"
+  },
+  {
+    "model": "svm",
+    "cv_metrics": {
+      "accuracy": {
+        "mean": 0.42784810126582284,
+        "std": 0.05212977286575696
+      },
+      "balanced_accuracy": {
+        "mean": 0.2695310571381563,
+        "std": 0.048670312563634875
+      },
+      "precision_macro": {
+        "mean": 0.26119696316114027,
+        "std": 0.03346412840905144
+      },
+      "recall_macro": {
+        "mean": 0.2695310571381563,
+        "std": 0.048670312563634875
+      },
+      "f1_macro": {
+        "mean": 0.26186367032235236,
+        "std": 0.04103191004859928
+      },
+      "precision_weighted": {
+        "mean": 0.4226509760420001,
+        "std": 0.035303499418394654
+      },
+      "recall_weighted": {
+        "mean": 0.42784810126582284,
+        "std": 0.05212977286575696
+      },
+      "f1_weighted": {
+        "mean": 0.4213609416108703,
+        "std": 0.04156670353795904
+      },
+      "mcc": {
+        "mean": 0.05393107402854928,
+        "std": 0.08107121631176198
+      },
+      "roc_auc": {
+        "mean": 0.5812808770199464,
+        "std": 0.06010684964350864
+      },
+      "fold": {
+        "mean": 3.0,
+        "std": 1.4142135623730951
+      }
+    },
+    "fold_metrics": [
+      {
+        "accuracy": 0.4936708860759494,
+        "balanced_accuracy": 0.30574980574980576,
+        "precision_macro": 0.27993197278911564,
+        "recall_macro": 0.30574980574980576,
+        "f1_macro": 0.29163175534143276,
+        "precision_weighted": 0.4489623697580298,
+        "recall_weighted": 0.4936708860759494,
+        "f1_weighted": 0.46967399009048666,
+        "mcc": 0.12823154671216314,
+        "roc_auc": 0.5916347586839391,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.6530612244897959,
+            "recall": 0.7272727272727273,
+            "f1": 0.6881720430107527
+          },
+          "STAGE II": {
+            "precision": 0.13333333333333333,
+            "recall": 0.1111111111111111,
+            "f1": 0.12121212121212122
+          },
+          "STAGE III": {
+            "precision": 0.3333333333333333,
+            "recall": 0.38461538461538464,
+            "f1": 0.35714285714285715
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 1
+      },
+      {
+        "accuracy": 0.3670886075949367,
+        "balanced_accuracy": 0.22088409007013657,
+        "precision_macro": 0.22466216216216217,
+        "recall_macro": 0.22088409007013657,
+        "f1_macro": 0.2206845238095238,
+        "precision_weighted": 0.4015851294332307,
+        "recall_weighted": 0.3670886075949367,
+        "f1_weighted": 0.3815099457504521,
+        "mcc": 0.004088338532600253,
+        "roc_auc": 0.5182369682674677,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.6486486486486487,
+            "recall": 0.5581395348837209,
+            "f1": 0.6
+          },
+          "STAGE II": {
+            "precision": 0.08333333333333333,
+            "recall": 0.1111111111111111,
+            "f1": 0.09523809523809523
+          },
+          "STAGE III": {
+            "precision": 0.16666666666666666,
+            "recall": 0.21428571428571427,
+            "f1": 0.1875
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 2
+      },
+      {
+        "accuracy": 0.4430379746835443,
+        "balanced_accuracy": 0.2657706430656247,
+        "precision_macro": 0.2544798951048951,
+        "recall_macro": 0.2657706430656247,
+        "f1_macro": 0.2543557168784029,
+        "precision_weighted": 0.4000011064884483,
+        "recall_weighted": 0.4430379746835443,
+        "f1_weighted": 0.414459325966597,
+        "mcc": 0.03212697544937659,
+        "roc_auc": 0.571969570956719,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.5576923076923077,
+            "recall": 0.6744186046511628,
+            "f1": 0.6105263157894737
+          },
+          "STAGE II": {
+            "precision": 0.2727272727272727,
+            "recall": 0.15789473684210525,
+            "f1": 0.2
+          },
+          "STAGE III": {
+            "precision": 0.1875,
+            "recall": 0.23076923076923078,
+            "f1": 0.20689655172413793
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 3
+      },
+      {
+        "accuracy": 0.46835443037974683,
+        "balanced_accuracy": 0.34095188776951324,
+        "precision_macro": 0.3156915739268681,
+        "recall_macro": 0.34095188776951324,
+        "f1_macro": 0.3242424242424242,
+        "precision_weighted": 0.4784230544766658,
+        "recall_weighted": 0.46835443037974683,
+        "f1_weighted": 0.468891446106636,
+        "mcc": 0.1630101251181197,
+        "roc_auc": 0.6896561082056798,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.6486486486486487,
+            "recall": 0.5581395348837209,
+            "f1": 0.6
+          },
+          "STAGE II": {
+            "precision": 0.32,
+            "recall": 0.42105263157894735,
+            "f1": 0.36363636363636365
+          },
+          "STAGE III": {
+            "precision": 0.29411764705882354,
+            "recall": 0.38461538461538464,
+            "f1": 0.3333333333333333
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 4
+      },
+      {
+        "accuracy": 0.3670886075949367,
+        "balanced_accuracy": 0.21429885903570114,
+        "precision_macro": 0.2312192118226601,
+        "recall_macro": 0.21429885903570114,
+        "f1_macro": 0.21840393133997785,
+        "precision_weighted": 0.384283220053626,
+        "recall_weighted": 0.3670886075949367,
+        "f1_weighted": 0.3722700001401797,
+        "mcc": -0.05780161566951327,
+        "roc_auc": 0.5349069789859263,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.5714285714285714,
+            "recall": 0.5454545454545454,
+            "f1": 0.5581395348837209
+          },
+          "STAGE II": {
+            "precision": 0.10344827586206896,
+            "recall": 0.15789473684210525,
+            "f1": 0.125
+          },
+          "STAGE III": {
+            "precision": 0.25,
+            "recall": 0.15384615384615385,
+            "f1": 0.19047619047619047
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 5
+      }
+    ],
+    "test_metrics": {
+      "accuracy": 0.43434343434343436,
+      "balanced_accuracy": 0.27719907407407407,
+      "precision_macro": 0.26023391812865493,
+      "recall_macro": 0.27719907407407407,
+      "f1_macro": 0.26834923158452567,
+      "precision_weighted": 0.4106562703053931,
+      "recall_weighted": 0.43434343434343436,
+      "f1_weighted": 0.4220905397375985,
+      "mcc": 0.05396632635485107,
+      "roc_auc": 0.5514115023266166,
+      "per_class": {
+        "STAGE I": {
+          "precision": 0.5964912280701754,
+          "recall": 0.6296296296296297,
+          "f1": 0.6126126126126126
+        },
+        "STAGE II": {
+          "precision": 0.16666666666666666,
+          "recall": 0.16666666666666666,
+          "f1": 0.16666666666666666
+        },
+        "STAGE III": {
+          "precision": 0.2777777777777778,
+          "recall": 0.3125,
+          "f1": 0.29411764705882354
+        },
+        "STAGE IV": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      }
+    },
+    "selected_feature_count": 1000,
+    "feature_selection_method": "anova",
+    "log1p": true,
+    "model_artifact": "D:\\LUAD_MultiOmics\\LUAD_MultiOmics\\artifacts\\experiments\\baseline_mrna_anova_log1p\\models\\svm.joblib"
+  },
+  {
+    "model": "xgboost",
+    "cv_metrics": {
+      "accuracy": {
+        "mean": 0.4835443037974684,
+        "std": 0.025817820321988795
+      },
+      "balanced_accuracy": {
+        "mean": 0.28585998694627823,
+        "std": 0.021621838424767927
+      },
+      "precision_macro": {
+        "mean": 0.2838310177643075,
+        "std": 0.030100049285804474
+      },
+      "recall_macro": {
+        "mean": 0.28585998694627823,
+        "std": 0.021621838424767927
+      },
+      "f1_macro": {
+        "mean": 0.2786609600966182,
+        "std": 0.026264343290495828
+      },
+      "precision_weighted": {
+        "mean": 0.4302484436502089,
+        "std": 0.027117798229133766
+      },
+      "recall_weighted": {
+        "mean": 0.4835443037974684,
+        "std": 0.025817820321988795
+      },
+      "f1_weighted": {
+        "mean": 0.4491153321036367,
+        "std": 0.025988638435008926
+      },
+      "mcc": {
+        "mean": 0.08091117830030922,
+        "std": 0.05543053338691518
+      },
+      "roc_auc": {
+        "mean": 0.5832225488403328,
+        "std": 0.050279944793968814
+      },
+      "fold": {
+        "mean": 3.0,
+        "std": 1.4142135623730951
+      }
+    },
+    "fold_metrics": [
+      {
+        "accuracy": 0.5189873417721519,
+        "balanced_accuracy": 0.2818084693084693,
+        "precision_macro": 0.2554563492063492,
+        "recall_macro": 0.2818084693084693,
+        "f1_macro": 0.2635185185185185,
+        "precision_weighted": 0.4344484629294756,
+        "recall_weighted": 0.5189873417721519,
+        "f1_weighted": 0.46852320675105485,
+        "mcc": 0.13589040665233132,
+        "roc_auc": 0.6574925211400622,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.6607142857142857,
+            "recall": 0.8409090909090909,
+            "f1": 0.74
+          },
+          "STAGE II": {
+            "precision": 0.1111111111111111,
+            "recall": 0.05555555555555555,
+            "f1": 0.07407407407407407
+          },
+          "STAGE III": {
+            "precision": 0.25,
+            "recall": 0.23076923076923078,
+            "f1": 0.24
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 1
+      },
+      {
+        "accuracy": 0.4810126582278481,
+        "balanced_accuracy": 0.31344592100406055,
+        "precision_macro": 0.3173096092503987,
+        "recall_macro": 0.31344592100406055,
+        "f1_macro": 0.31339471339471336,
+        "precision_weighted": 0.4573705913229563,
+        "recall_weighted": 0.4810126582278481,
+        "f1_weighted": 0.46706943415804175,
+        "mcc": 0.12001745999305165,
+        "roc_auc": 0.5409816223722056,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.6041666666666666,
+            "recall": 0.6744186046511628,
+            "f1": 0.6373626373626373
+          },
+          "STAGE II": {
+            "precision": 0.21052631578947367,
+            "recall": 0.2222222222222222,
+            "f1": 0.21621621621621623
+          },
+          "STAGE III": {
+            "precision": 0.45454545454545453,
+            "recall": 0.35714285714285715,
+            "f1": 0.4
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 2
+      },
+      {
+        "accuracy": 0.45569620253164556,
+        "balanced_accuracy": 0.26424065530552676,
+        "precision_macro": 0.25167624521072796,
+        "recall_macro": 0.26424065530552676,
+        "f1_macro": 0.2491796322489392,
+        "precision_weighted": 0.38550608661913766,
+        "recall_weighted": 0.45569620253164556,
+        "f1_weighted": 0.40797880149678617,
+        "mcc": 0.00720172338338726,
+        "roc_auc": 0.516783271468094,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.5344827586206896,
+            "recall": 0.7209302325581395,
+            "f1": 0.6138613861386139
+          },
+          "STAGE II": {
+            "precision": 0.2222222222222222,
+            "recall": 0.10526315789473684,
+            "f1": 0.14285714285714285
+          },
+          "STAGE III": {
+            "precision": 0.25,
+            "recall": 0.23076923076923078,
+            "f1": 0.24
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 3
+      },
+      {
+        "accuracy": 0.5063291139240507,
+        "balanced_accuracy": 0.30825722624988233,
+        "precision_macro": 0.32189542483660133,
+        "recall_macro": 0.30825722624988233,
+        "f1_macro": 0.3070078546882671,
+        "precision_weighted": 0.4573508728385869,
+        "recall_weighted": 0.5063291139240507,
+        "f1_weighted": 0.47312379212418365,
+        "mcc": 0.12156618263033332,
+        "roc_auc": 0.6133472232921438,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.6111111111111112,
+            "recall": 0.7674418604651163,
+            "f1": 0.6804123711340206
+          },
+          "STAGE II": {
+            "precision": 0.17647058823529413,
+            "recall": 0.15789473684210525,
+            "f1": 0.16666666666666666
+          },
+          "STAGE III": {
+            "precision": 0.5,
+            "recall": 0.3076923076923077,
+            "f1": 0.38095238095238093
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 4
+      },
+      {
+        "accuracy": 0.45569620253164556,
+        "balanced_accuracy": 0.2615476628634523,
+        "precision_macro": 0.27281746031746035,
+        "recall_macro": 0.2615476628634523,
+        "f1_macro": 0.2602040816326531,
+        "precision_weighted": 0.41656620454088805,
+        "recall_weighted": 0.45569620253164556,
+        "f1_weighted": 0.42888142598811674,
+        "mcc": 0.01988011884244261,
+        "roc_auc": 0.5875081059291586,
+        "per_class": {
+          "STAGE I": {
+            "precision": 0.5555555555555556,
+            "recall": 0.6818181818181818,
+            "f1": 0.6122448979591837
+          },
+          "STAGE II": {
+            "precision": 0.25,
+            "recall": 0.21052631578947367,
+            "f1": 0.22857142857142856
+          },
+          "STAGE III": {
+            "precision": 0.2857142857142857,
+            "recall": 0.15384615384615385,
+            "f1": 0.2
+          },
+          "STAGE IV": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "fold": 5
+      }
+    ],
+    "test_metrics": {
+      "accuracy": 0.5252525252525253,
+      "balanced_accuracy": 0.2962962962962963,
+      "precision_macro": 0.30625,
+      "recall_macro": 0.2962962962962963,
+      "f1_macro": 0.27981486796785304,
+      "precision_weighted": 0.43888888888888883,
+      "recall_weighted": 0.5252525252525253,
+      "f1_weighted": 0.45452226049240974,
+      "mcc": 0.10664242909125712,
+      "roc_auc": 0.5111404048028204,
+      "per_class": {
+        "STAGE I": {
+          "precision": 0.575,
+          "recall": 0.8518518518518519,
+          "f1": 0.6865671641791045
+        },
+        "STAGE II": {
+          "precision": 0.25,
+          "recall": 0.08333333333333333,
+          "f1": 0.125
+        },
+        "STAGE III": {
+          "precision": 0.4,
+          "recall": 0.25,
+          "f1": 0.3076923076923077
+        },
+        "STAGE IV": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      }
+    },
+    "selected_feature_count": 1000,
+    "feature_selection_method": "anova",
+    "log1p": true,
+    "model_artifact": "D:\\LUAD_MultiOmics\\LUAD_MultiOmics\\artifacts\\experiments\\baseline_mrna_anova_log1p\\models\\xgboost.joblib"
+  }
+]

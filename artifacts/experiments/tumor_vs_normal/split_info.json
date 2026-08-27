@@ -1,0 +1,14 @@
+{
+  "train_size": 451,
+  "test_size": 113,
+  "train_distribution": {
+    "1": 406,
+    "0": 45
+  },
+  "test_distribution": {
+    "1": 102,
+    "0": 11
+  },
+  "random_state": 42,
+  "stratified": true
+}

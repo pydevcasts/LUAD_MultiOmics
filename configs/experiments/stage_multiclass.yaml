@@ -87,4 +87,142 @@ harmonization:
 mutation_data:
   sample_column: Tumor_Sample_Barcode
   gene_column: Hugo_Symbol
+  variant_classification_column: Variant_Classification
   include_matched_normal: false
+  exclude_variant_classifications:
+    - Silent
+
+data_preparation:
+  chunksize: 5000
+  mutation_chunksize: 100000
+
+  prepare_keys:
+    - clinical
+    - mrna_rsem
+    - mirna
+    - methylation
+    - cna_raw
+    - rppa_raw
+    - rppa_zscores
+    - mutations
+
+  feature_schemas:
+    mrna_rsem:
+      feature_id_column: Hugo_Symbol
+      feature_id_fallback_column: Entrez_Gene_Id
+      feature_metadata_columns:
+        - Entrez_Gene_Id
+      feature_prefix: mrna
+      output_orientation: patient_by_feature
+
+    mirna:
+      feature_id_column: miRNA_ID
+      feature_metadata_columns: []
+      feature_prefix: mirna
+      output_orientation: patient_by_feature
+
+    methylation:
+      feature_id_column: ENTITY_STABLE_ID
+      feature_name_column: NAME
+      feature_metadata_columns:
+        - NAME
+        - DESCRIPTION
+        - TRANSCRIPT_ID
+      feature_prefix: meth
+      output_orientation: feature_by_patient
+
+    cna_raw:
+      feature_id_column: Hugo_Symbol
+      feature_id_fallback_column: Entrez_Gene_Id
+      feature_metadata_columns:
+        - Entrez_Gene_Id
+      feature_prefix: cna_raw
+      output_orientation: patient_by_feature
+
+    rppa_raw:
+      feature_id_column: Composite.Element.REF
+      feature_metadata_columns: []
+      feature_prefix: rppa_raw
+      output_orientation: patient_by_feature
+
+    rppa_zscores:
+      feature_id_column: Composite.Element.REF
+      feature_metadata_columns: []
+      feature_prefix: rppa_zscore
+      output_orientation: patient_by_feature
+
+cohort:
+  primary: core_mutation
+  target_column: stage_group
+
+  definitions:
+    stage_only: []
+
+    mrna_only:
+      - has_mrna_rsem
+
+    clinical_mrna:
+      - has_mrna_rsem
+
+    mrna_mirna:
+      - has_mrna_rsem
+      - has_mirna
+
+    mrna_mirna_methylation:
+      - has_mrna_rsem
+      - has_mirna
+      - has_methylation
+
+    core_omics:
+      - has_mrna_rsem
+      - has_mirna
+      - has_methylation
+      - has_cna_raw
+
+    core_mutation:
+      - has_mrna_rsem
+      - has_mirna
+      - has_methylation
+      - has_cna_raw
+      - has_mutations
+
+    core_rppa:
+      - has_mrna_rsem
+      - has_mirna
+      - has_methylation
+      - has_cna_raw
+      - has_rppa_zscores
+
+    all_main:
+      - has_mrna_rsem
+      - has_mirna
+      - has_methylation
+      - has_cna_raw
+      - has_rppa_zscores
+      - has_mutations
+    
+baseline:
+  cv_folds: 5
+  max_missing_ratio: 0.2
+  top_variance_features: 1000
+  feature_selection_method: anova
+  random_state: 42
+
+  log1p_modalities:
+    - mrna_rsem
+    - mirna
+
+  models:
+    - logistic_regression
+    - random_forest
+    - svm
+    - xgboost
+
+late_fusion:
+  base_model: random_forest
+  meta_learner: logistic_regression
+  cv_folds: 5
+  max_missing_ratio: 0.2
+  top_features: 500
+  feature_selection_method: anova
+  random_state: 42
