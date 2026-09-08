@@ -1,0 +1,13 @@
+{
+  "dataset": "GSE81089",
+  "description": "Bulk RNA-seq LUAD (108 tumor + 11 normal)",
+  "platform": "Illumina HiSeq 2500",
+  "tumor_samples": 108,
+  "normal_samples": 11,
+  "gene_id_type": "Gene Symbol",
+  "file_path": "D:\\LUAD_MultiOmics\\LUAD_MultiOmics\\artifacts\\external_validation\\GSE81089_series_matrix.txt.gz",
+  "file_size_mb": 0.0,
+  "samples_found": 218,
+  "series_title": "\"Next Generation Sequencing (RNAseq) of non-small cell lung cancer\"",
+  "platform_id": "\"GPL16791\""
+}

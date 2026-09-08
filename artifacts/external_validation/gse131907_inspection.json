@@ -1,0 +1,18 @@
+{
+  "file_path": "D:\\LUAD_MultiOmics\\LUAD_MultiOmics\\datasets\\GSE131907_Lung_Cancer_normalized_log2TPM_matrix.txt",
+  "file_size_mb": 16590.0,
+  "total_columns": 208507,
+  "feature_id_column": "Index",
+  "n_samples": 208506,
+  "separator": "\t",
+  "tcga_samples": 0,
+  "gsm_samples": 0,
+  "feature_id_examples": [
+    "A1BG",
+    "A1BG-AS1",
+    "A1CF",
+    "A2M",
+    "A2M-AS1"
+  ],
+  "metadata_files_found": []
+}

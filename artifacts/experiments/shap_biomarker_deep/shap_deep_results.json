@@ -1,0 +1,289 @@
+{
+  "task": "Tumor vs Normal",
+  "model": "XGBoost",
+  "pso_genes_total": 324,
+  "pso_genes_matched": 324,
+  "model_performance": {
+    "balanced_accuracy": 1.0,
+    "roc_auc": 1.0
+  },
+  "shap_samples": 113,
+  "top_biomarkers": [
+    {
+      "gene": "TMEM8B",
+      "mean_abs_shap": 1.2902716398239136,
+      "mean_signed_shap": 0.8172590732574463,
+      "direction": "UP_in_TUMOR",
+      "rank": 1,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "SDPR",
+      "mean_abs_shap": 0.46025246381759644,
+      "mean_signed_shap": 0.2659737467765808,
+      "direction": "UP_in_TUMOR",
+      "rank": 2,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "STX1A",
+      "mean_abs_shap": 0.4430380165576935,
+      "mean_signed_shap": 0.3621116876602173,
+      "direction": "UP_in_TUMOR",
+      "rank": 3,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "SGCG",
+      "mean_abs_shap": 0.43201372027397156,
+      "mean_signed_shap": 0.25258752703666687,
+      "direction": "UP_in_TUMOR",
+      "rank": 4,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "SNAP47",
+      "mean_abs_shap": 0.3943687379360199,
+      "mean_signed_shap": 0.3091347813606262,
+      "direction": "UP_in_TUMOR",
+      "rank": 5,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "MSTO1",
+      "mean_abs_shap": 0.2690374255180359,
+      "mean_signed_shap": 0.17248345911502838,
+      "direction": "UP_in_TUMOR",
+      "rank": 6,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "ERCC6L",
+      "mean_abs_shap": 0.18300607800483704,
+      "mean_signed_shap": 0.12708498537540436,
+      "direction": "UP_in_TUMOR",
+      "rank": 7,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "EIF2AK1",
+      "mean_abs_shap": 0.12869706749916077,
+      "mean_signed_shap": 0.0967547670006752,
+      "direction": "UP_in_TUMOR",
+      "rank": 8,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "FABP4",
+      "mean_abs_shap": 0.09252167493104935,
+      "mean_signed_shap": 0.0710139200091362,
+      "direction": "UP_in_TUMOR",
+      "rank": 9,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "C9orf140",
+      "mean_abs_shap": 0.08647754788398743,
+      "mean_signed_shap": 0.06110271066427231,
+      "direction": "UP_in_TUMOR",
+      "rank": 10,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "PDLIM2",
+      "mean_abs_shap": 0.07872910052537918,
+      "mean_signed_shap": 0.05963814631104469,
+      "direction": "UP_in_TUMOR",
+      "rank": 11,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "ETV4",
+      "mean_abs_shap": 0.07271847873926163,
+      "mean_signed_shap": 0.05399392917752266,
+      "direction": "UP_in_TUMOR",
+      "rank": 12,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "DONSON",
+      "mean_abs_shap": 0.06665509939193726,
+      "mean_signed_shap": 0.048837173730134964,
+      "direction": "UP_in_TUMOR",
+      "rank": 13,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "CLEC3B",
+      "mean_abs_shap": 0.06412066519260406,
+      "mean_signed_shap": 0.049866221845149994,
+      "direction": "UP_in_TUMOR",
+      "rank": 14,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "GPT2",
+      "mean_abs_shap": 0.0582910031080246,
+      "mean_signed_shap": 0.04689682647585869,
+      "direction": "UP_in_TUMOR",
+      "rank": 15,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "C1orf112",
+      "mean_abs_shap": 0.03727532550692558,
+      "mean_signed_shap": 0.029469367116689682,
+      "direction": "UP_in_TUMOR",
+      "rank": 16,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "EXO1",
+      "mean_abs_shap": 0.03421897813677788,
+      "mean_signed_shap": 0.029156308621168137,
+      "direction": "UP_in_TUMOR",
+      "rank": 17,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "CD36",
+      "mean_abs_shap": 0.03209453821182251,
+      "mean_signed_shap": 0.02886340022087097,
+      "direction": "UP_in_TUMOR",
+      "rank": 18,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "ADARB1",
+      "mean_abs_shap": 0.022811822593212128,
+      "mean_signed_shap": 0.01832539215683937,
+      "direction": "UP_in_TUMOR",
+      "rank": 19,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "CCL23",
+      "mean_abs_shap": 0.02124360203742981,
+      "mean_signed_shap": 0.019223719835281372,
+      "direction": "UP_in_TUMOR",
+      "rank": 20,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "ARHGEF3",
+      "mean_abs_shap": 0.018712256103754044,
+      "mean_signed_shap": 0.016354039311408997,
+      "direction": "UP_in_TUMOR",
+      "rank": 21,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "ANGPTL5",
+      "mean_abs_shap": 0.01759018748998642,
+      "mean_signed_shap": 0.015044069848954678,
+      "direction": "UP_in_TUMOR",
+      "rank": 22,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "UPK3B",
+      "mean_abs_shap": 0.0167278740555048,
+      "mean_signed_shap": 0.014792663045227528,
+      "direction": "UP_in_TUMOR",
+      "rank": 23,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "GBP7",
+      "mean_abs_shap": 0.012368862517178059,
+      "mean_signed_shap": 0.008526629768311977,
+      "direction": "UP_in_TUMOR",
+      "rank": 24,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "PDZD2",
+      "mean_abs_shap": 0.0,
+      "mean_signed_shap": 0.0,
+      "direction": "DOWN_in_TUMOR",
+      "rank": 25,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "PHLDA2",
+      "mean_abs_shap": 0.0,
+      "mean_signed_shap": 0.0,
+      "direction": "DOWN_in_TUMOR",
+      "rank": 26,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "PHOSPHO1",
+      "mean_abs_shap": 0.0,
+      "mean_signed_shap": 0.0,
+      "direction": "DOWN_in_TUMOR",
+      "rank": 27,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "PDE5A",
+      "mean_abs_shap": 0.0,
+      "mean_signed_shap": 0.0,
+      "direction": "DOWN_in_TUMOR",
+      "rank": 28,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "PDCD2L",
+      "mean_abs_shap": 0.0,
+      "mean_signed_shap": 0.0,
+      "direction": "DOWN_in_TUMOR",
+      "rank": 29,
+      "pathways": "",
+      "in_pathway": false
+    },
+    {
+      "gene": "PI16",
+      "mean_abs_shap": 0.0,
+      "mean_signed_shap": 0.0,
+      "direction": "DOWN_in_TUMOR",
+      "rank": 30,
+      "pathways": "",
+      "in_pathway": false
+    }
+  ],
+  "pathway_coverage": {
+    "n_in_pathway": 0,
+    "total_top": 30,
+    "percentage": 0.0
+  },
+  "pathway_breakdown": {}
+}

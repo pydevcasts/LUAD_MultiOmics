@@ -1,0 +1,18 @@
+{
+  "dataset": "GSE30219",
+  "platform": "GPL570 (Affymetrix HG-U133 Plus 2.0)",
+  "total_samples": 307,
+  "luad_samples": 307,
+  "labeled_samples": 307,
+  "n_tumor": 307,
+  "n_normal": 0,
+  "pso_genes_total": 324,
+  "pso_genes_matched": 295,
+  "common_genes_used": 295,
+  "metrics": {
+    "note": "No normal samples for full classification evaluation",
+    "predicted_tumor": 307,
+    "predicted_normal": 0,
+    "mean_probability": 0.9899
+  }
+}
