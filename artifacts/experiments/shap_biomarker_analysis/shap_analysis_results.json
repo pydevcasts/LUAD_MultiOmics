@@ -1,0 +1,84 @@
+{
+  "model_performance": {
+    "balanced_accuracy": 1.0,
+    "roc_auc": 1.0
+  },
+  "pso_genes_total": 324,
+  "pso_genes_matched": 324,
+  "top_biomarkers_count": 30,
+  "pathway_coverage": "0/30 (0.0%)",
+  "known_luad_biomarkers_in_top": 1,
+  "pathway_enrichment": {},
+  "top_10_biomarkers": [
+    {
+      "gene": "TMEM8B",
+      "mean_abs_shap": 1.2902716398239136,
+      "direction": "UP_in_TUMOR",
+      "pathways": "",
+      "known_luad": false
+    },
+    {
+      "gene": "SDPR",
+      "mean_abs_shap": 0.46025246381759644,
+      "direction": "UP_in_TUMOR",
+      "pathways": "",
+      "known_luad": false
+    },
+    {
+      "gene": "STX1A",
+      "mean_abs_shap": 0.4430380165576935,
+      "direction": "UP_in_TUMOR",
+      "pathways": "",
+      "known_luad": false
+    },
+    {
+      "gene": "SGCG",
+      "mean_abs_shap": 0.43201372027397156,
+      "direction": "UP_in_TUMOR",
+      "pathways": "",
+      "known_luad": false
+    },
+    {
+      "gene": "SNAP47",
+      "mean_abs_shap": 0.3943687379360199,
+      "direction": "UP_in_TUMOR",
+      "pathways": "",
+      "known_luad": false
+    },
+    {
+      "gene": "MSTO1",
+      "mean_abs_shap": 0.2690374255180359,
+      "direction": "UP_in_TUMOR",
+      "pathways": "",
+      "known_luad": false
+    },
+    {
+      "gene": "ERCC6L",
+      "mean_abs_shap": 0.18300607800483704,
+      "direction": "UP_in_TUMOR",
+      "pathways": "",
+      "known_luad": false
+    },
+    {
+      "gene": "EIF2AK1",
+      "mean_abs_shap": 0.12869706749916077,
+      "direction": "UP_in_TUMOR",
+      "pathways": "",
+      "known_luad": false
+    },
+    {
+      "gene": "FABP4",
+      "mean_abs_shap": 0.09252167493104935,
+      "direction": "UP_in_TUMOR",
+      "pathways": "",
+      "known_luad": false
+    },
+    {
+      "gene": "C9orf140",
+      "mean_abs_shap": 0.08647754788398743,
+      "direction": "UP_in_TUMOR",
+      "pathways": "",
+      "known_luad": false
+    }
+  ]
+}
