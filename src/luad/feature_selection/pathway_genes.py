@@ -2,6 +2,8 @@
 
 Sources: KEGG, Reactome, MSigDB, and recent literature (2023-2025).
 These pathways are directly relevant to cancer progression and survival.
+
+Updated 2026-09-10: Added lung cancer-related biomarkers identified by SHAP analysis.
 """
 
 PATHWAY_GENE_SETS = {
@@ -174,6 +176,30 @@ PATHWAY_GENE_SETS = {
         "CDKN1A", "CDKN2A",
         "MDM2", "MDM4",
         "ATM", "ATR", "CHEK1", "CHEK2",
+    ],
+
+    # Added 2026-09-10: Lung cancer biomarkers from SHAP analysis
+    "lung_cancer_biomarkers": [
+        "TMEM8B",  # Top biomarker - membrane regulation
+        "SDPR",    # Tumor suppressor, serum deprivation protein
+        "STX1A",   # Syntaxin-1A, vesicle trafficking
+        "SGCG",    # Sarcoglycan gamma
+        "SNAP47",  # SNARE complex protein
+        "MSTO1",   # Misato homolog, cell division
+        "ERCC6L",  # DNA repair
+        "EIF2AK1", # Stress response kinase
+        "FABP4",   # Fatty acid binding protein
+        "ETV4",    # ETS transcription factor (mentioned in proposal)
+        "EXOs",     # Exonuclease
+        "CD36",    # Fatty acid translocase
+        "CLEC3B",  # C-type lectin
+        "GPT2",    # Glutamate pyruvate transaminase
+        "DONSON",  # Developmental protein
+        "PDLIM2",  # PDZ and LIM domain protein
+        "ADARB1",  # RNA editing enzyme
+        "CCL23",   # Chemokine
+        "ARHGEF3", # Rho guanine nucleotide exchange factor
+        "ANGPTL5", # Angiopoietin-like protein
     ],
 }
 
