@@ -1,4 +1,4 @@
-"""Late Fusion with PSO for mRNA + miRNA + Clinical data."""
+"""Late Fusion with PSO for mRNA + miRNA + Clinical data (Fixed v2 - reads processed clinical)."""
 
 from pathlib import Path
 import argparse
@@ -30,7 +30,7 @@ def parse_args():
     parser.add_argument("--mirna-pso-target", type=int, default=80)
     parser.add_argument("--mirna-pso-particles", type=int, default=30)
     parser.add_argument("--mirna-pso-iterations", type=int, default=50)
-    parser.add_argument("--experiment-name", type=str, default="late_fusion_3modality")
+    parser.add_argument("--experiment-name", type=str, default="late_fusion_3modality_final")
     return parser.parse_args()
 
 
@@ -58,166 +58,271 @@ def main():
     )
 
     output_dir = ensure_dir(project_root / "artifacts" / "experiments" / args.experiment_name)
-    figures_dir = ensure_dir(output_dir / "figures")
 
-    # === STEP 1: Load Labels & Data ===
+    # ================================================================
+    # STEP 1: Loading Multi-Modal Data
+    # ================================================================
     logger.info("=" * 60)
     logger.info("STEP 1: Loading Multi-Modal Data")
     logger.info("=" * 60)
 
-    # Load from prepared mrna_mirna_tn directory
     tn_dir = project_root / "data" / "processed" / "mrna_mirna_tn"
+
+    # Load Labels
     labels_df = pd.read_csv(tn_dir / "labels.csv").set_index("sample_id")
-    
-    # Load Modalities
+
+    # Load mRNA & miRNA
     mrna_df = pd.read_parquet(tn_dir / "mrna.parquet")
     mirna_df = pd.read_parquet(tn_dir / "mirna.parquet")
-    
-    # Load Clinical Data
-    clin_path = project_root / "datasets" / "data_clinical_patient.txt"
-    clin_raw = pd.read_csv(clin_path, sep="\t", index_col=0)
-    
-    # Select relevant clinical features (numeric/categorical convertible)
-    # Note: Adjust column names based on actual file inspection
-    clin_features = ['AGE', 'GENDER', 'PATHOLOGIC_STAGE'] 
-    available_clin = [c for c in clin_features if c in clin_raw.columns]
-    
-    if not available_clin:
-        logger.warning("No matching clinical features found. Trying generic numeric columns.")
-        # Fallback: select first few numeric columns if specific ones missing
-        numeric_cols = clin_raw.select_dtypes(include=[np.number]).columns[:5]
-        available_clin = list(numeric_cols)
-        
-    clin_data = clin_raw[available_clin].copy()
-    
-    # Align indices across all modalities
-    common_idx = sorted(set(mrna_df.index) & set(mirna_df.index) & set(clin_data.index) & set(labels_df.index))
-    logger.info(f"Common patients across ALL modalities: {len(common_idx)}")
-    
-    if len(common_idx) < 50:
-        logger.error("Too few common patients for training!")
+
+    # Drop label column if exists in feature matrices
+    if "label" in mrna_df.columns:
+        mrna_df = mrna_df.drop(columns=["label"])
+    if "label" in mirna_df.columns:
+        mirna_df = mirna_df.drop(columns=["label"])
+
+    # FIXED v2: Load PROCESSED clinical data instead of raw file
+    clin_processed_path = project_root / "data" / "processed" / "clinical_tn" / "clinical_processed.parquet"
+    has_clinical = False
+    clin_df = pd.DataFrame()
+
+    if clin_processed_path.exists():
+        clin_raw = pd.read_parquet(clin_processed_path)
+        # Drop label column from clinical features
+        if "label" in clin_raw.columns:
+            clin_features = clin_raw.drop(columns=["label"])
+        else:
+            clin_features = clin_raw.copy()
+
+        if not clin_features.empty:
+            # Align patients across all modalities
+            common_patients_all = sorted(
+                set(mrna_df.index) & set(mirna_df.index) & set(clin_features.index)
+            )
+            if len(common_patients_all) > 0:
+                clin_df = clin_features.loc[common_patients_all]
+                has_clinical = True
+                logger.info(
+                    f"Clinical features loaded from processed file: "
+                    f"{clin_df.shape[1]} features, {clin_df.shape[0]} patients"
+                )
+                logger.info(f"Clinical columns: {list(clin_df.columns)}")
+            else:
+                logger.warning("No common patients between clinical and molecular data.")
+        else:
+            logger.warning("Processed clinical file is empty.")
+    else:
+        logger.warning(
+            f"Processed clinical file not found at {clin_processed_path}. "
+            f"Run prepare_clinical_features.py first."
+        )
+
+    # Determine common patients
+    if has_clinical:
+        common_patients = sorted(
+            set(mrna_df.index) & set(mirna_df.index) & set(clin_df.index)
+        )
+    else:
+        common_patients = sorted(set(mrna_df.index) & set(mirna_df.index))
+
+    logger.info(f"Common patients across modalities: {len(common_patients)}")
+
+    # Subset data to common patients
+    X_mrna_full = mrna_df.loc[common_patients]
+    X_mirna_full = mirna_df.loc[common_patients]
+    y_full = labels_df.loc[common_patients, "label"]
+
+    if has_clinical:
+        X_clin_full = clin_df.loc[common_patients]
+        logger.info(
+            f"Data shapes -> mRNA: {X_mrna_full.shape}, "
+            f"miRNA: {X_mirna_full.shape}, Clinical: {X_clin_full.shape}"
+        )
+    else:
+        logger.info(
+            f"Data shapes -> mRNA: {X_mrna_full.shape}, "
+            f"miRNA: {X_mirna_full.shape} (No Clinical)"
+        )
+
+    # ================================================================
+    # Train/Test Split
+    # ================================================================
+    idx_train, idx_test = train_test_split(
+        np.arange(len(common_patients)),
+        test_size=0.2, random_state=42, stratify=y_full
+    )
+
+    y_train = y_full.iloc[idx_train].reset_index(drop=True)
+    y_test = y_full.iloc[idx_test].reset_index(drop=True)
+
+    X_mrna_tr = X_mrna_full.iloc[idx_train].reset_index(drop=True)
+    X_mrna_te = X_mrna_full.iloc[idx_test].reset_index(drop=True)
+    X_mirna_tr = X_mirna_full.iloc[idx_train].reset_index(drop=True)
+    X_mirna_te = X_mirna_full.iloc[idx_test].reset_index(drop=True)
+
+    if has_clinical:
+        X_clin_tr = X_clin_full.iloc[idx_train].reset_index(drop=True)
+        X_clin_te = X_clin_full.iloc[idx_test].reset_index(drop=True)
+
+    # ================================================================
+    # STEP 2: Feature Selection & Preprocessing
+    # ================================================================
+    logger.info("=" * 60)
+    logger.info("STEP 2: Feature Selection & Preprocessing")
+    logger.info("=" * 60)
+
+    # Load PSO genes for mRNA
+    pso_genes_path = (
+        project_root / "artifacts" / "experiments"
+        / args.pso_mrna_experiment / "pso_selected_genes.csv"
+    )
+    pso_genes = pd.read_csv(pso_genes_path)["gene"].tolist()
+
+    # Align mRNA columns to PSO genes
+    avail_cols = {str(c): c for c in X_mrna_tr.columns}
+    matched_mrna_cols = [avail_cols[g] for g in pso_genes if g in avail_cols]
+
+    if len(matched_mrna_cols) == 0:
+        logger.error("No PSO genes matched in mRNA data!")
         sys.exit(1)
 
-    y = labels_df.loc[common_idx, "label"].astype(int)
-    X_mrna = mrna_df.loc[common_idx]
-    X_mirna = mirna_df.loc[common_idx]
-    X_clin = clin_data.loc[common_idx].fillna(0) # Simple imputation
-    
-    logger.info(f"Data shapes -> mRNA: {X_mrna.shape}, miRNA: {X_mirna.shape}, Clinical: {X_clin.shape}")
+    X_mrna_tr = X_mrna_tr[matched_mrna_cols]
+    X_mrna_te = X_mrna_te[matched_mrna_cols]
+    logger.info(f"mRNA aligned to {len(matched_mrna_cols)} PSO genes")
 
-    # === STEP 2: Train/Test Split ===
-    idx_train, idx_test = train_test_split(
-        np.arange(len(common_idx)), test_size=0.2, random_state=42, stratify=y
+    # Preprocess mRNA
+    prep_mrna = fit_preprocessor(
+        X_mrna_tr, y_train.values,
+        max_missing_ratio=0.2,
+        top_variance_features=len(matched_mrna_cols),
+        feature_selection_method="variance",
+        log1p=True,
     )
-    
-    y_train, y_test = y.iloc[idx_train], y.iloc[idx_test]
-    
-    # Split modalities
-    X_mrna_tr, X_mrna_te = X_mrna.iloc[idx_train], X_mrna.iloc[idx_test]
-    X_mirna_tr, X_mirna_te = X_mirna.iloc[idx_train], X_mirna.iloc[idx_test]
-    X_clin_tr, X_clin_te = X_clin.iloc[idx_train], X_clin.iloc[idx_test]
-
-    # === STEP 3: Feature Selection & Preprocessing ===
-    logger.info("Preprocessing & Feature Selection...")
-    
-    # mRNA: Use pre-selected PSO genes
-    pso_genes_path = project_root / "artifacts" / "experiments" / args.pso_mrna_experiment / "pso_selected_genes.csv"
-    pso_genes = pd.read_csv(pso_genes_path)["gene"].tolist()
-    
-    # Align mRNA columns
-    mrna_cols = [c for c in mrna_cols if c in mrna_pso_cols] # Simplified alignment logic needed in real impl
-    # For brevity, assuming alignment function exists or handled previously
-    
-    # Preprocess mRNA/miRNA
-    prep_mrna = fit_preprocessor(X_mrna_tr, y_train.values, max_missing_ratio=0.2, 
-                                 top_variance_features=324, feature_selection_method="variance", log1p=True)
     X_mrna_tr_p = transform_preprocessor(X_mrna_tr, prep_mrna)
     X_mrna_te_p = transform_preprocessor(X_mrna_te, prep_mrna)
-    
-    # miRNA: Run PSO (simplified here, assuming previous PSO results can be reused or re-run)
-    # For this script, we assume PSO was run separately or reuse logic. 
-    # To save time, let's assume we use top variance for demo if PSO not integrated directly
-    prep_mirna = fit_preprocessor(X_mirna_tr, y_train.values, max_missing_ratio=0.2,
-                                  top_variance_features=args.mirna_pso_target, feature_selection_method="anova", log1p=True)
+
+    # Preprocess miRNA (ANOVA top-k)
+    prep_mirna = fit_preprocessor(
+        X_mirna_tr, y_train.values,
+        max_missing_ratio=0.2,
+        top_variance_features=args.mirna_pso_target,
+        feature_selection_method="anova",
+        log1p=True,
+    )
     X_mirna_tr_p = transform_preprocessor(X_mirna_tr, prep_mirna)
     X_mirna_te_p = transform_preprocessor(X_mirna_te, prep_mirna)
-    
-    # Clinical: Scale
-    scaler_clin = StandardScaler()
-    X_clin_tr_s = scaler_clin.fit_transform(X_clin_tr)
-    X_clin_te_s = scaler_clin.transform(X_clin_te)
+    logger.info(f"miRNA reduced to {X_mirna_tr_p.shape[1]} features")
 
-    # === STEP 4: Train Base Models ===
-    logger.info("Training Base Models...")
-    
+    # Preprocess Clinical (Scale only)
+    scaler_clin = None
+    X_clin_tr_p = None
+    X_clin_te_p = None
+    if has_clinical:
+        scaler_clin = StandardScaler()
+        X_clin_tr_p = scaler_clin.fit_transform(X_clin_tr.fillna(0))
+        X_clin_te_p = scaler_clin.transform(X_clin_te.fillna(0))
+        logger.info(f"Clinical scaled: {X_clin_tr_p.shape[1]} features")
+
+    # ================================================================
+    # STEP 3: Train Base Models
+    # ================================================================
+    logger.info("=" * 60)
+    logger.info("STEP 3: Training Base Models")
+    logger.info("=" * 60)
+
     # mRNA Model
     model_mrna = create_model("xgboost", random_state=42, num_classes=2)
     model_mrna.fit(X_mrna_tr_p, y_train)
+    prob_mrna_tr = model_mrna.predict_proba(X_mrna_tr_p)[:, 1]
     prob_mrna_te = model_mrna.predict_proba(X_mrna_te_p)[:, 1]
-    
+    ba_mrna = balanced_accuracy_score(y_test, model_mrna.predict(X_mrna_te_p))
+    logger.info(f"mRNA Model BA: {ba_mrna:.4f}")
+
     # miRNA Model
     model_mirna = create_model("xgboost", random_state=42, num_classes=2)
     model_mirna.fit(X_mirna_tr_p, y_train)
+    prob_mirna_tr = model_mirna.predict_proba(X_mirna_tr_p)[:, 1]
     prob_mirna_te = model_mirna.predict_proba(X_mirna_te_p)[:, 1]
-    
-    # Clinical Model (Logistic Regression often better for small tabular data)
-    model_clin = LogisticRegression(max_iter=1000, class_weight="balanced", random_state=42)
-    model_clin.fit(X_clin_tr_s, y_train)
-    prob_clin_te = model_clin.predict_proba(X_clin_te_s)[:, 1]
-    
-    # Evaluate single modalities
-    ba_mrna = balanced_accuracy_score(y_test, (prob_mrna_te > 0.5).astype(int))
-    ba_mirna = balanced_accuracy_score(y_test, (prob_mirna_te > 0.5).astype(int))
-    ba_clin = balanced_accuracy_score(y_test, (prob_clin_te > 0.5).astype(int))
-    
-    logger.info(f"Base Models Test BA -> mRNA: {ba_mrna:.4f}, miRNA: {ba_mirna:.4f}, Clinical: {ba_clin:.4f}")
+    ba_mirna = balanced_accuracy_score(y_test, model_mirna.predict(X_mirna_te_p))
+    logger.info(f"miRNA Model BA: {ba_mirna:.4f}")
 
-    # === STEP 5: Meta-Learner (Late Fusion) ===
-    logger.info("Training Meta-Learner...")
-    
-    meta_train = np.column_stack([
-        model_mrna.predict_proba(transform_preprocessor(X_mrna_tr, prep_mrna))[:,1],
-        model_mirna.predict_proba(transform_preprocessor(X_mirna_tr, prep_mirna))[:,1],
-        model_clin.predict_proba(X_clin_tr_s)[:,1]
-    ])
-    
-    meta_test = np.column_stack([prob_mrna_te, prob_mirna_te, prob_clin_te])
-    
-    meta_model = LogisticRegression(max_iter=1000, class_weight="balanced", random_state=42)
+    # Clinical Model (if available)
+    prob_clin_tr = None
+    prob_clin_te = None
+    ba_clin = None
+    if has_clinical and X_clin_tr_p is not None:
+        model_clin = LogisticRegression(
+            max_iter=5000, class_weight="balanced",
+            solver="lbfgs", random_state=42
+        )
+        model_clin.fit(X_clin_tr_p, y_train)
+        prob_clin_tr = model_clin.predict_proba(X_clin_tr_p)[:, 1]
+        prob_clin_te = model_clin.predict_proba(X_clin_te_p)[:, 1]
+        ba_clin = balanced_accuracy_score(y_test, model_clin.predict(X_clin_te_p))
+        logger.info(f"Clinical Model BA: {ba_clin:.4f}")
+
+    # ================================================================
+    # STEP 4: Late Fusion Meta-Learner
+    # ================================================================
+    logger.info("=" * 60)
+    logger.info("STEP 4: Late Fusion Meta-Learner")
+    logger.info("=" * 60)
+
+    if has_clinical and prob_clin_tr is not None:
+        meta_train = np.column_stack([prob_mrna_tr, prob_mirna_tr, prob_clin_tr])
+        meta_test = np.column_stack([prob_mrna_te, prob_mirna_te, prob_clin_te])
+        fusion_name = "Late Fusion (mRNA+miRNA+Clinical)"
+    else:
+        meta_train = np.column_stack([prob_mrna_tr, prob_mirna_tr])
+        meta_test = np.column_stack([prob_mrna_te, prob_mirna_te])
+        fusion_name = "Late Fusion (mRNA+miRNA)"
+        logger.warning("Clinical data missing. Running 2-modality fusion instead.")
+
+    meta_model = LogisticRegression(
+        max_iter=5000, class_weight="balanced",
+        solver="lbfgs", random_state=42
+    )
     meta_model.fit(meta_train, y_train)
-    
+
     meta_pred = meta_model.predict(meta_test)
     meta_prob = meta_model.predict_proba(meta_test)[:, 1]
-    
-    final_ba = balanced_accuracy_score(y_test, meta_pred)
-    final_auc = roc_auc_score(y_test, meta_prob)
-    
-    logger.info(f"LATE FUSION RESULT -> BA: {final_ba:.4f}, AUC: {final_auc:.4f}")
 
-    # === STEP 6: Save Results ===
+    ba_fusion = balanced_accuracy_score(y_test, meta_pred)
+    auc_fusion = roc_auc_score(y_test, meta_prob)
+
+    logger.info(f"{fusion_name}: BA={ba_fusion:.4f}, AUC={auc_fusion:.4f}")
+
+    # ================================================================
+    # Save Results
+    # ================================================================
     results = {
         "experiment": args.experiment_name,
-        "modalities": ["mRNA", "miRNA", "Clinical"],
-        "n_patients": len(common_idx),
+        "modalities": ["mRNA", "miRNA"] + (["Clinical"] if has_clinical else []),
+        "n_patients": len(common_patients),
         "results": {
-            "mrna_only": {"ba": round(ba_mrna, 4)},
-            "mirna_only": {"ba": round(ba_mirna, 4)},
-            "clinical_only": {"ba": round(ba_clin, 4)},
-            "late_fusion_3mod": {"ba": round(final_ba, 4), "auc": round(final_auc, 4)}
-        }
+            "mrna_only": {"test_ba": round(ba_mrna, 4)},
+            "mirna_only": {"test_ba": round(ba_mirna, 4)},
+            fusion_name: {
+                "test_ba": round(ba_fusion, 4),
+                "test_auc": round(auc_fusion, 4),
+            },
+        },
     }
-    
-    with (output_dir / "fusion_results.json").open("w") as f:
+    if has_clinical and ba_clin is not None:
+        results["results"]["clinical_only"] = {"test_ba": round(ba_clin, 4)}
+
+    with (output_dir / "late_fusion_results.json").open("w") as f:
         json.dump(results, f, indent=2)
-        
-    print("\n" + "="*60)
-    print("LATE FUSION (3 MODALITIES) COMPLETE")
-    print("="*60)
+
+    print("\n" + "=" * 60)
+    print(f"RESULTS: {fusion_name}")
+    print("=" * 60)
     print(f"mRNA Only BA:      {ba_mrna:.4f}")
     print(f"miRNA Only BA:     {ba_mirna:.4f}")
-    print(f"Clinical Only BA:  {ba_clin:.4f}")
-    print(f"LATE FUSION BA:    {final_ba:.4f} | AUC: {final_auc:.4f}")
-    print("="*60)
+    if has_clinical and ba_clin is not None:
+        print(f"Clinical Only BA:  {ba_clin:.4f}")
+    print(f"{fusion_name} BA: {ba_fusion:.4f} | AUC: {auc_fusion:.4f}")
+    print("=" * 60)
     print(f"Results saved to: {output_dir}")
 
 

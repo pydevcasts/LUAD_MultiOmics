@@ -1,0 +1,20 @@
+{
+  "experiment": "late_fusion_3modality",
+  "modalities": [
+    "mRNA",
+    "miRNA"
+  ],
+  "n_patients": 503,
+  "results": {
+    "mrna_only": {
+      "test_ba": 1.0
+    },
+    "mirna_only": {
+      "test_ba": 0.7505
+    },
+    "Late Fusion (mRNA+miRNA)": {
+      "test_ba": 0.9944,
+      "test_auc": 1.0
+    }
+  }
+}
