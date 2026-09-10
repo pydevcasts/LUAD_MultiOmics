@@ -1,0 +1,4 @@
+[2026-09-10 14:12:19] [INFO] [luad.shap_deep] ============================================================
+[2026-09-10 14:12:19] [INFO] [luad.shap_deep] Loading tumor/normal data and PSO genes
+[2026-09-10 14:12:19] [INFO] [luad.shap_deep] ============================================================
+[2026-09-10 14:12:19] [ERROR] [luad.shap_deep] Tumor/normal data not found: /workspace/data/processed/tumor_normal/tumor_normal_combined.parquet
