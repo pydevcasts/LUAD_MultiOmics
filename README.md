@@ -1,6 +1,6 @@
-# LUAD MultiOmics
+﻿# LUAD MultiOmics
 
-This project contains data preparation, feature selection, model training, and validation workflows for LUAD (lung adenocarcinoma) multi-omics analysis.
+This project contains the LUAD (lung adenocarcinoma) data-preparation, feature-selection, model-training, and external-validation pipelines.
 
 ## Environment setup
 
@@ -28,52 +28,47 @@ python -m pip install -r requirements.txt
 .
 ├── configs/
 ├── docs/
-├── notebook/
 ├── scripts/
 ├── src/
 ├── requirements.txt
 ├── environment.yml
-└── README.md
+├── README.md
+└── .gitignore
 ```
 
-## Common commands
+## Core commands
 
-### Run a script
-
-```bash
-python scripts/train_baseline.py
-python scripts/train_late_fusion.py
-python scripts/train_survival.py
-python scripts/validate_external_gse30219.py
-```
-
-### Prepare datasets
+### Data preparation
 
 ```bash
 python scripts/prepare_data.py
 python scripts/build_cohort.py
 python scripts/make_split.py
 python scripts/prepare_clinical_features.py
+python scripts/prepare_mrna_mirna_tn.py
+python scripts/prepare_tumor_normal.py
+python scripts/prepare_survival.py
+python scripts/prepare_4modality_tn.py
 ```
 
-### Data inspection and validation
+### Model training and validation
 
 ```bash
-python scripts/check_config_loader.py
-python scripts/check_yaml.py
-python scripts/inspect_clinical_ids.py
-python scripts/inspect_gpl570.py
-```
-
-### External validation and explainability
-
-```bash
+python scripts/train_baseline.py
+python scripts/train_late_fusion.py
+python scripts/train_late_fusion_clinical.py
+python scripts/train_late_fusion_pso.py
+python scripts/train_pso_feature_selection.py
+python scripts/train_pathway_survival.py
+python scripts/train_survival.py
+python scripts/train_tumor_normal.py
 python scripts/run_external_validation_gse30219.py
+python scripts/validate_external_gse30219.py
 python scripts/run_shap_analysis.py
 python scripts/run_shap_biomarker_deep.py
 ```
 
-## Python path
+### Python path
 
 The project packages are under the `src/` directory. If needed, add the source directory to `PYTHONPATH`:
 
@@ -83,7 +78,7 @@ export PYTHONPATH=$PYTHONPATH:$(pwd)/src
 $env:PYTHONPATH += ";$PWD\src"
 ```
 
-## Useful checks
+### Useful checks
 
 ```bash
 python -m compileall src
@@ -92,6 +87,6 @@ python -m pytest
 
 ## Notes
 
-- Use the scripts under `scripts/` for dataset preparation and training workflows.
-- Keep configuration files under `configs/` and update them according to cohort-specific metadata.
-- Jupyter notebooks are stored under `notebook/` and are intended for exploratory and reporting work.
+- The scripts under `scripts/` provide the operational workflow for preparing data and running models.
+- Exploratory inspection and diagnostics scripts were removed because they do not contribute to the final pipeline or results.
+- Final model execution should use the training and validation scripts listed above.
