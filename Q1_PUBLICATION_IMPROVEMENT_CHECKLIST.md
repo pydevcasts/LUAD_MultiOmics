@@ -1,86 +1,61 @@
-# Checklist for improving the project toward Q1 journal quality
+# Q1 publication readiness checklist
 
-## A. Scientific rigor and reproducibility
+This document summarizes the main actions needed to improve the project from a strong exploratory pipeline into a statistically robust, publication-ready multi-omics study.
 
-- [ ] Confirm that all reported results come from a single, fixed train/test split and are not mixed across exploratory runs.
-- [ ] Store the exact random seeds for all models and preprocessing steps.
-- [ ] Publish the full pipeline in a reproducible manner: data version, config version, code version, environment lockfile.
-- [ ] Record the exact commit hash used for each evaluation run.
-- [ ] Add a reproducibility section in the paper and repository README describing all steps from raw data to final metrics.
+## 1. Validation and reproducibility
 
-## B. Validation strategy
+- Use nested cross-validation or repeated validation rather than a single train/test split.
+- Report mean ± standard deviation for all major metrics.
+- Include confidence intervals for AUC, balanced accuracy, F1, sensitivity, and specificity.
+- Fix and record all random seeds for preprocessing, sampling, and model training.
+- Keep a complete record of data versions, code commit hashes, and configuration files for each experiment.
 
-- [ ] Use stratified k-fold or repeated nested CV instead of relying only on a single held-out split.
-- [ ] Report mean ± standard deviation for every metric across folds.
-- [ ] Include confidence intervals for AUC, BA, F1, sensitivity, specificity, and MCC.
-- [ ] Perform external validation on at least one independent dataset with a clearly defined target definition.
-- [ ] Report how external datasets were harmonized and whether the same preprocessing pipeline was applied.
-- [ ] Add ablation studies for modality contributions and feature-selection contributions.
+## 2. Statistical rigor
 
-## C. Model benchmarking and fairness
+- Add significance testing for model comparisons, such as DeLong or paired bootstrap tests.
+- Report sample counts, exclusion criteria, class imbalance, and missingness transparently.
+- Clearly separate primary and secondary endpoints.
+- Include ablation studies to quantify the contribution of each modality and feature-selection stage.
+- Compare the fusion model against strong, relevant baselines under the same conditions.
 
-- [ ] Compare against strong baseline models using the same feature sets and data splits.
-- [ ] Benchmark against published LUAD or multi-omics baselines from the literature.
-- [ ] Ensure the PSO feature-selection procedure is executed only within training folds, not on the full dataset.
-- [ ] Clearly state whether feature selection and model tuning were nested inside CV.
-- [ ] Test whether clinical-only performance can explain the fusion gain or whether the fusion gain is statistically significant.
+## 3. External validation
 
-## D. Interpretability and biological validation
+- Validate the model on at least one independent external cohort.
+- Ensure cohort harmonization is applied consistently across discovery and validation datasets.
+- Report whether the external validation task matches the same biological objective and label definition.
+- Document differences in preprocessing and their potential effect on generalization.
 
-- [ ] Convert SHAP results into publication-ready figures: summary plot, bar plot, beeswarm, and per-feature interpretation.
-- [ ] Validate selected biomarkers against existing cancer literature and known LUAD pathways.
-- [ ] Add pathway-level or gene-set enrichment analysis for the selected biomarkers.
-- [ ] Discuss whether biomarker importance is biologically plausible and whether it is stable across folds.
-- [ ] Distinguish between model importance and biological causality.
+## 4. Interpretability and biological relevance
 
-## E. Statistical and reporting quality
+- Prepare publication-quality SHAP figures and explain modality-level importance clearly.
+- Validate selected biomarkers against established LUAD biology and prior literature.
+- Add pathway or gene-set enrichment analysis for the candidate markers.
+- Distinguish clearly between model importance and biological causality.
 
-- [ ] Add significance tests such as DeLong test, paired bootstrap, or non-parametric comparisons where applicable.
-- [ ] Report sample counts, missingness, and exclusion criteria in a transparent table.
-- [ ] Clearly separate primary endpoint and secondary endpoint results.
-- [ ] Include a limitations section discussing class imbalance, cohort bias, and generalization concerns.
-- [ ] Add a clear statement of whether the dataset is tumor-vs-normal, subtype classification, or survival prediction.
+## 5. Manuscript quality and reporting
 
-## F. Journal-ready manuscript structure
+- Write a clear introduction identifying the scientific gap and novelty.
+- Provide a complete methods section covering preprocessing, harmonization, feature selection, and fusion strategy.
+- Add tables and figures with consistent naming, labels, and statistical annotations.
+- Include a limitations section and future-work discussion.
+- Add supplementary materials for hyperparameters, code access, and dataset provenance.
 
-- [ ] Draft a strong introduction with the problem statement and literature gap.
-- [ ] Include a clear method section with preprocessing, harmonization, feature selection, and model fusion details.
-- [ ] Add a full results section with tables and figures for each experiment.
-- [ ] Include a discussion section emphasizing novelty, clinical relevance, and limitations.
-- [ ] Add supplementary material with dataset provenance, hyperparameters, and code access.
+## 6. Practical project improvements
 
-## G. Practical project improvements
+- Remove exploratory or historical scripts that do not belong to the final pipeline.
+- Standardize experiment names, artifact folders, and result files.
+- Create a single entry point for the end-to-end workflow.
+- Add CI checks for syntax validation and package import smoke tests.
+- Version model checkpoints and selected feature sets for reproducible downstream analysis.
 
-- [ ] Remove historical/unused exploratory scripts and keep only the final pipeline scripts.
-- [ ] Standardize naming conventions for experiments, artifacts, and outputs.
-- [ ] Add a single entrypoint script for running the end-to-end workflow.
-- [ ] Add a CI check for Python syntax and package import tests.
-- [ ] Keep final artifacts in a clean structure such as `artifacts/experiments/<experiment_name>/`.
-- [ ] Add a release tag or versioned dataset/model snapshot for each accepted model configuration.
+## 7. Priority order
 
-## H. Priority order for Q1 preparation
-
-### Highest priority
-
-1. Clean validation strategy and nested CV
-2. External validation on independent cohort(s)
+1. Strong validation strategy and nested CV
+2. External validation and generalization checks
 3. Statistical significance and confidence intervals
-4. Reproducibility and fixed random seeds
-5. Publication-quality figures and tables
+4. Reproducibility and environment locking
+5. Publication-ready figures and manuscript preparation
 
-### Medium priority
+## 8. Final assessment
 
-1. Strong ablation studies
-2. Biological validation of biomarkers
-3. More robust baseline comparisons
-4. Autogenerated reports per experiment
-
-### Lower priority
-
-1. Additional model families
-2. Additional exploratory analyses
-3. Extra visualization experiments
-
-## Summary
-
-To be competitive in a Q1 journal, the project should move from an exploratory but promising pipeline into a reproducible, statistically robust, externally validated, and publication-ready study. The biggest gaps are likely validation rigor, statistical reporting, and evidence that the very high performance is not due to leakage, overfitting, or data leakage during feature selection.
+The project is promising and scientifically relevant, but to be competitive in a Q1 journal it should be converted from a strong exploratory workflow into a reproducible, statistically rigorous, externally validated, and publication-ready study. The main risks to address are leakage, validation transparency, and unclear statistical reporting.

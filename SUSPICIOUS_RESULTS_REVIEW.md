@@ -1,66 +1,58 @@
-# Suspicious or high-risk findings requiring manual review
+# Results audit and risk review
 
-This file lists observations that may indicate non-realistic, overfitted, or weakly validated results and should be reviewed before publication.
+This document records the main findings that should be checked before making any strong publication claim. The goal is to identify potential problems such as leakage, over-optimism, or weak validation.
 
-## 1. Extremely high performance values
+## 1. High-performance findings that need scrutiny
 
-- [ ] mRNA-only AUC = 1.0000 and BA = 1.0000 are unusually strong for a biological classification task and should be reviewed carefully.
-- [ ] Late Fusion AUC = 1.0000 should be checked for leakage, feature leakage, or a train/test contamination issue.
-- [ ] Very high metrics can still be valid, but they require a clear explanation of split strategy, preprocessing isolation, and nested validation.
+- The reported mRNA-only AUC and balanced accuracy near 1.0000 are unusually high for a biological classification task and should be reviewed carefully.
+- The late-fusion AUC of 1.0000 is a major flag for possible overfitting or contamination.
+- Such scores may still be valid, but they require clear evidence that preprocessing, feature selection, and model tuning were kept strictly inside training folds.
 
-## 2. Risk of leakage via feature selection
+## 2. Leakage risk during feature selection
 
-- [ ] If PSO or ANOVA filtering was run on the full dataset before splitting, the reported metrics may be inflated.
-- [ ] Confirm that the feature-selection step is nested inside training folds and not applied to the full cohort before evaluation.
-- [ ] Check whether the same subjects appear across train and test sets after harmonization, split generation, or external validation preparation.
+- Feature selection must not be performed on the full dataset before the train/test split.
+- PSO or ANOVA-based filtering should be nested inside cross-validation if it is used for model optimization.
+- Confirm that patient samples are not duplicated or misaligned during harmonization across modalities.
 
-## 3. External validation may be incomplete
+## 3. External validation concerns
 
-- [ ] The external validation dataset appears to contain only tumor samples in some reports (for example, 307 predicted tumor samples and zero normal samples).
-- [ ] This is not necessarily a problem, but it means the evaluation may not be a balanced tumor-vs-normal test for the external cohort.
-- [ ] Confirm whether the task is truly binary detection in the external dataset or whether a different target definition was applied.
+- Some external validation outputs appear to contain only tumor predictions and zero normal predictions.
+- This does not necessarily invalidate the result, but it limits the interpretation of balanced classification performance.
+- The target definition used in the external cohort must match the discovery setting exactly.
 
-## 4. Path-specific or historical workflow mismatch
+## 4. Historical workflow mismatch
 
-- [ ] The provided command list references old paths like `D:\LUAD_MultiOmics\LUAD_MultiOmics\`, `data/`, `datasets/`, and `venv/`.
-- [ ] These older paths may not match the current repository layout and could be stale historical notes rather than final instructions.
-- [ ] Verify whether the commands were run in the same environment and version of the repo as the final artifacts.
+- Some command examples reference old repository paths and legacy folders, suggesting historical or exploratory runs rather than the final pipeline.
+- These old paths should not be interpreted as the final validated workflow without checking the exact commit and environment used.
 
-## 5. Multiple experiment versions create ambiguity
+## 5. Experiment version ambiguity
 
-- [ ] Several experiment names such as `pso_tumor_normal_v3`, `pso_tumor_normal_target50`, `late_fusion_mrna_mirna_final`, and `late_fusion_3modality_final` suggest a long trial-and-error process.
-- [ ] Without a clear experiment registry, it is hard to know which result is the official final result.
-- [ ] The final manuscript should clearly specify the accepted experiment and the reasoning behind choosing it.
+- Multiple experiment names suggest a long cycle of tuning and testing.
+- Without a clear experiment manifest, it is difficult to know which result is the official final result.
+- A publication-grade study requires a single clearly documented final configuration.
 
-## 6. Unclear standardization of preprocessing
+## 6. Statistical reporting gaps
 
-- [ ] It should be verified whether clinical features, mRNA, and miRNA were harmonized using the same patient IDs and filtered using the same inclusion criteria.
-- [ ] The procedure for sample alignment across modalities should be documented in detail.
-- [ ] If harmonization was done in a way that depends on outcome labels, that would be a major risk factor.
+- A single BA or AUC value is not sufficient for a strong journal-level analysis.
+- Report means, standard deviations, confidence intervals, and repeated validation outcomes.
+- Without variance estimates, unexpectedly perfect scores can appear suspicious.
 
-## 7. Need for statistical confidence reporting
+## 7. Questions that must be answered before publication
 
-- [ ] Only reporting a single BA/AUC value is not enough for a strong Q1-level paper.
-- [ ] The metrics should be accompanied by confidence intervals and repeated-validation statistics.
-- [ ] Without variance estimates, a perfect or near-perfect score can look suspicious and may reflect a favorable split rather than true robustness.
+- Was feature selection applied only inside training folds?
+- Was the same preprocessing pipeline used for discovery and external validation?
+- Were any inclusion or exclusion rules derived from outcome labels?
+- Were patient IDs harmonized consistently across modalities?
+- Did the evaluation use the same data split for hyperparameter tuning and final reporting?
 
-## 8. Questions to resolve before any publication claim
+## 8. Recommended review actions
 
-- [ ] Was PSO applied only to training folds, or to the full cohort?
-- [ ] Did the external validation cohort use the same preprocessing as the discovery cohort?
-- [ ] Was any sample filtering performed using label information?
-- [ ] Are there any duplicated patient records across modalities or across folds?
-- [ ] Are the reported metrics based on the same dataset used for hyperparameter selection?
-- [ ] Is the training/validation split truly blinded to the final evaluation set?
+- Re-run the final project in a clean environment with locked dependencies.
+- Generate one canonical experiment record for the official result.
+- Compare the final metric with nested cross-validation and repeated splitting.
+- Check whether the result remains stable under a less optimistic validation design.
+- If the metric remains near-perfect, provide a transparent discussion of why this is biologically and statistically plausible.
 
-## 9. Recommended review actions
+## 9. Final assessment
 
-- [ ] Re-run the final pipeline from a clean environment with locked dependencies.
-- [ ] Generate a single reproducible experiment manifest for the official result.
-- [ ] Compare the official result with nested-CV and repeated-split validation.
-- [ ] Check whether the same high scores persist under a more realistic, less optimistic split strategy.
-- [ ] If the metrics remain unusually high, document the reason clearly and provide a transparent discussion around the possibility of data leakage or cohort bias.
-
-## 10. Summary
-
-The project looks promising, but the currently reported scores are high enough that they require a careful leak-check and validation audit before being considered final publication-grade evidence. The major risks are feature-selection leakage, sample contamination during harmonization, and unclear experiment versioning.
+The pipeline is promising, but the strongest reported results should be treated as provisional until leakage and validation risks are checked systematically. The most important review points are feature-selection leakage, data contamination during harmonization, and unclear final experiment provenance.
