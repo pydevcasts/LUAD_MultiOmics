@@ -1,1 +1,42 @@
-Nothing should be ignored in this case, as only a Python source file was modified and no build artifacts, dependencies, or temporary files were present in the changes.
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Packaging and test/coverage output
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Notebooks and local tooling
+.ipynb_checkpoints/
+.vscode/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Logs and generated plot files
+artifacts/logs/
+artifacts/experiments/**/figures/*.png
+artifacts/experiments/**/model_performance_comparison.png
+artifacts/experiments/**/pso_convergence.png
+
+# Large raw and processed datasets
+datasets/*
+data/interim/*
+data/processed/*

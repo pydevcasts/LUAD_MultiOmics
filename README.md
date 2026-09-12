@@ -125,6 +125,13 @@ python scripts/train_pso_feature_selection.py
 python scripts/train_late_fusion.py
 python scripts/train_late_fusion_pso.py
 
+
+## Plotting experiment results
+
+Generate the model-performance bar chart and PSO-convergence line chart from an experiment artifact:
+
+```bash
+python scripts/plot_results.py --experiment-dir artifacts/experiments/pso_tumor_normal_v3
 # 3. تحلیل تفسیرپذیری
 python scripts/run_shap_analysis.py
 python scripts/run_shap_biomarker_deep.py
